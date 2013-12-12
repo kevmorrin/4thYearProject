@@ -50,7 +50,14 @@
             @Html.LabelFor(model => model.County)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.County)
+             @{
+                List<String> counties = new List<String>() { "Antrim", "Armagh", "Carlow", "Cavan", "Clare", "Cork", "Derry", 
+                    "Donegal", "Down", "Fermanagh", "Galway", "Kerry", "Kildare", "Kilkenny", "Laois", "Leitrim", "Limerick", 
+                    "Longford", "Louth", "Mayo", "Meath", "Monaghan", "Offaly", "Roscommon", "Sligo", "Tipperary", "Tyrone", 
+                    "Waterford", "Westmeath", "Wexford", "Wicklow" };
+             }
+
+            @Html.DropDownListFor(model => model.County, new SelectList(counties))
             @Html.ValidationMessageFor(model => model.County)
         </div>
 
