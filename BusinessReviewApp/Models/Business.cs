@@ -20,13 +20,19 @@ namespace BusinessReviewApp.Models
     {
         [Key]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
+        [Required]
         public int BusinessID { get; set; }
+        [Required]
         public string Name { get; set; }
         public Nullable<int> Number { get; set; }
+        [Required]
         public string Street { get; set; }
+        [Required]
         public string Town { get; set; }
         public string Postcode { get; set; }
+        [Required]
         public string County { get; set; }
+        [Required]
         public string Category { get; set; }
         public string Description { get; set; }
         public string URLPhoto1 { get; set; }

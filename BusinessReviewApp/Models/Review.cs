@@ -14,10 +14,15 @@ namespace BusinessReviewApp.Models
     {
         [Key]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
+        [Required]
         public int ReviewID { get; set; }
+        [Required]
         public string Description { get; set; }
+        [Required]
         public int Rating { get; set; }
+        [Required]
         public int BusinessID { get; set; }
+        [Required]
         public int UserId { get; set; }
 
         public virtual Business Business { get; set; }
