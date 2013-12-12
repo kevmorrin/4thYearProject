@@ -5,7 +5,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessReviewApp", "Busine
 EndProject
 Project("{CC5FD16D-436D-48AD-A40C-5A424C6E3E79}") = "BusinessReviewApp.Azure", "BusinessReviewApp.Azure\BusinessReviewApp.Azure.ccproj", "{CCBBE153-1B0B-4A11-B579-E09E9CDB6447}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestBusinessReviewApp", "TestBusinessReviewApp\TestBusinessReviewApp.csproj", "{75CD9B50-5EE5-4026-8D69-7D161C2BADB6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestBusinessReviewApp", "TestBusinessReviewApp\TestBusinessReviewApp.csproj", "{B13556D4-564A-4324-826D-48D49405C7D8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,10 +21,10 @@ Global
 		{CCBBE153-1B0B-4A11-B579-E09E9CDB6447}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CCBBE153-1B0B-4A11-B579-E09E9CDB6447}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CCBBE153-1B0B-4A11-B579-E09E9CDB6447}.Release|Any CPU.Build.0 = Release|Any CPU
-		{75CD9B50-5EE5-4026-8D69-7D161C2BADB6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{75CD9B50-5EE5-4026-8D69-7D161C2BADB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{75CD9B50-5EE5-4026-8D69-7D161C2BADB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{75CD9B50-5EE5-4026-8D69-7D161C2BADB6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B13556D4-564A-4324-826D-48D49405C7D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B13556D4-564A-4324-826D-48D49405C7D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B13556D4-564A-4324-826D-48D49405C7D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B13556D4-564A-4324-826D-48D49405C7D8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
