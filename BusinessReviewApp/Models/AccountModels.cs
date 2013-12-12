@@ -10,6 +10,7 @@ namespace BusinessReviewApp.Models
 {
     public class UsersContext : DbContext
     {
+        //
         public UsersContext()
             : base("DefaultConnection")
         {
