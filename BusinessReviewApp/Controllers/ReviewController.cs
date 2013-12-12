@@ -54,9 +54,43 @@ namespace BusinessReviewApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Reviews.Add(review);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                //Assume business review for that user already exists
+                bool reviewAlreadyExists = false;
+
+                //Check to see if there is already a review for the business for the user.
+                List<Review> reviews = new List<Review>();
+
+                //Foreach Review check if there is reviews for the business
+                foreach (var item in db.Reviews)
+                {
+                    if(item.BusinessID == review.BusinessID)
+                    {
+                        reviews.Add(item);
+                    }    
+                }
+
+                //Foreach review, check if the user has already added one.
+                foreach (var item in reviews)
+                {
+                    if (item.UserId == review.UserId)
+                    {
+                        reviewAlreadyExists = true;
+                    }
+                }
+
+                //Check if a review for this business from this user does not already exist
+                if(reviewAlreadyExists == true)
+                {
+                    ModelState.AddModelError("", "You have already review this business and may not add another review.");
+                }
+                else
+                {
+                    //Add details
+                    db.Reviews.Add(review);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+               
             }
 
             ViewBag.BusinessID = new SelectList(db.Businesses, "BusinessID", "Name", review.BusinessID);
