@@ -1,4 +1,4 @@
-﻿html {
+﻿ html {
     background-color: #e2e2e2;
     margin: 0;
     padding: 0;
@@ -22,14 +22,16 @@ a {
     text-decoration: underline;
 }
 
-    a:link, a:visited,
-    a:active, a:hover {
-        color: #333;
-    }
+a:link, a:visited, a:active, a:hover 
+{
+    color: #333;
+}
 
-    a:hover {
-        background-color: #c7d1d6;
-    }
+a:hover 
+{
+    background-color: #c7d1d6;
+}
+
 
 header, footer, hgroup,
 nav, section {

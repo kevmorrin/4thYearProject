@@ -24,8 +24,8 @@ namespace BusinessReviewApp
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AuthConfig.RegisterAuth();
-            Database.SetInitializer<Models.UsersContext>(new CreateDatabaseIfNotExists<Models.UsersContext>());
-            //System.Data.Entity.Database.SetInitializer(new System.Data.Entity.DropCreateDatabaseIfModelChanges<Models.UsersContext>());
+            //Database.SetInitializer<Models.UsersContext>(new CreateDatabaseIfNotExists<Models.UsersContext>());
+            System.Data.Entity.Database.SetInitializer(new System.Data.Entity.DropCreateDatabaseIfModelChanges<Models.UsersContext>());
         }
     }
 }

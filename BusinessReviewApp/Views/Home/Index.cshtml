@@ -1,22 +1,25 @@
 ﻿@{
     ViewBag.Title = "Home";
 }
-@section featured {
-    <section class="featured">
-        <div class="content-wrapper">
-            <hgroup class="title">
-                <h1>@ViewBag.Title</h1>
-                <h2>@ViewBag.Message</h2>
-            </hgroup>
+
+<hgroup class="title">
+    <h2>@ViewBag.Title</h2>
+</hgroup>
+<div class="row">
+    <div class="col-md-7 text-justify">  <!-- Left Hand Side Of The Page 7/12 In Size -->
+        <p>
+            Welcome to LookItUp, the online application that allows users to search for Irish businesses and share their veiws and opinions. 
+            LookItUp is crowdsourced, which means the LookItUp community can keep business details up to date.
+            This means information can easily be updated as changes happen, resulting in a quick and convienaint way for people to share details about their favourite businesses.
+        </p>
+    </div>
+      
+    <div class="col-md-5 text-justify">  <!-- Left Hand Side Of The Page 5/12 In Size -->
+          <h3>Newly Added Businesses</h3>
             <p>
-               Browse Irish businesses as a guest or sign in to add business details.
+                This sections will feature some of the newly added businesses to encourage users to add more details about them.
             </p>
-        </div>
-    </section>
-}
-<h3>Featured Businesses:</h3>
-<ol class="round">
-    <li class="one">
-        <h5>Business Details will be listed in this section</h5>
-    </li>
-</ol>
+    </div>
+</div>
+
+

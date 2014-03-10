@@ -13,9 +13,10 @@
 
     <fieldset>
         <legend>Business</legend>
+        <i class="requiredField">* Indicates a required field</i>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Name)
+           * @Html.LabelFor(model => model.Name)
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.Name)
@@ -23,15 +24,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Number)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Number)
-            @Html.ValidationMessageFor(model => model.Number)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Street)
+           * @Html.LabelFor(model => model.Street)
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.Street)
@@ -39,7 +32,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Town)
+           * @Html.LabelFor(model => model.Town)
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.Town)
@@ -47,14 +40,14 @@
         </div>
        
          <div class="editor-label">
-            @Html.LabelFor(model => model.County)
+           * @Html.LabelFor(model => model.County)
         </div>
         <div class="editor-field">
              @{
-                List<String> counties = new List<String>() { "Antrim", "Armagh", "Carlow", "Cavan", "Clare", "Cork", "Derry", 
-                    "Donegal", "Down", "Fermanagh", "Galway", "Kerry", "Kildare", "Kilkenny", "Laois", "Leitrim", "Limerick", 
-                    "Longford", "Louth", "Mayo", "Meath", "Monaghan", "Offaly", "Roscommon", "Sligo", "Tipperary", "Tyrone", 
-                    "Waterford", "Westmeath", "Wexford", "Wicklow" };
+                List<String> counties = new List<String>() {"", "Antrim", "Armagh", "Carlow", "Cavan", "Clare", "Cork", "Derry", 
+                    "Donegal", "Down", "Dublin", "Fermanagh", "Galway", "Kerry", "Kildare", "Kilkenny", "Laois", "Leitrim", 
+                    "Limerick", "Longford", "Louth", "Mayo", "Meath", "Monaghan", "Offaly", "Roscommon", "Sligo", "Tipperary", 
+                    "Tyrone", "Waterford", "Westmeath", "Wexford", "Wicklow" };
              }
 
             @Html.DropDownListFor(model => model.County, new SelectList(counties))
@@ -62,7 +55,35 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Postcode)
+           * @Html.LabelFor(model => model.Category)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Category)
+            @Html.ValidationMessageFor(model => model.Category)
+        </div>
+
+        <div class="editor-label">
+           * @Html.LabelFor(model => model.Description)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Description)
+            @Html.ValidationMessageFor(model => model.Description)
+        </div>
+
+       <!-- <div class="editor-label">
+           * @Html.LabelFor(model => model.URLPhoto1)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.URLPhoto1)
+            @Html.ValidationMessageFor(model => model.URLPhoto1)
+            <input id="fileUpload" type="file" Runat="server" name="fileUpload">
+
+            <label id="lblMessage" runat="server" Width="416px" Font-Size="10" Font-Name="verdana"></label>
+        </div>
+
+
+         <div class="editor-label">
+           @Html.LabelFor(model => model.Postcode)
         </div>
 
         <div class="editor-field">
@@ -71,31 +92,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Category)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Category)
-            @Html.ValidationMessageFor(model => model.Category)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Description)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Description)
-            @Html.ValidationMessageFor(model => model.Description)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.URLPhoto1)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.URLPhoto1)
-            @Html.ValidationMessageFor(model => model.URLPhoto1)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.URLPhoto2)
+           * @Html.LabelFor(model => model.URLPhoto2)
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.URLPhoto2)
@@ -103,7 +100,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.URLPhoto3)
+           * @Html.LabelFor(model => model.URLPhoto3)
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.URLPhoto3)
@@ -111,7 +108,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.URLPhoto4)
+           * @Html.LabelFor(model => model.URLPhoto4)
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.URLPhoto4)
@@ -119,7 +116,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.URLPhoto5)
+           * @Html.LabelFor(model => model.URLPhoto5)
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.URLPhoto5)
@@ -127,7 +124,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.DecimalLatitude)
+           * @Html.LabelFor(model => model.DecimalLatitude)
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.DecimalLatitude)
@@ -135,7 +132,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.DecimalLongtitude)
+           * @Html.LabelFor(model => model.DecimalLongtitude)
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.DecimalLongtitude)
@@ -143,7 +140,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.PhoneNumber)
+           * @Html.LabelFor(model => model.PhoneNumber)
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.PhoneNumber)
@@ -159,10 +156,10 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.WebsiteURL)
+           * @Html.LabelFor(model => model.WebsiteURL)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.WebsiteURL)
+           * @Html.EditorFor(model => model.WebsiteURL)
             @Html.ValidationMessageFor(model => model.WebsiteURL)
         </div>
 
@@ -178,7 +175,10 @@
             @Html.LabelFor(model => model.SuitableForFamilies)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.SuitableForFamilies)
+            @{
+                List<String> yesOrNo = new List<String>() { "", "Yes", "No"};
+             }
+            @Html.DropDownListFor(model => model.SuitableForFamilies, new SelectList(yesOrNo))
             @Html.ValidationMessageFor(model => model.SuitableForFamilies)
         </div>
 
@@ -186,12 +186,14 @@
             @Html.LabelFor(model => model.FastFood)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.FastFood)
+            @Html.DropDownListFor(model => model.FastFood, new SelectList(yesOrNo))
             @Html.ValidationMessageFor(model => model.FastFood)
-        </div>
+        </div>-->
 
+        <br>
         @Html.Recaptcha(theme:Recaptcha.Web.RecaptchaTheme.Blackglass)
-
+        <br>
+        
         <p>
             <input type="submit" value="Create" />
         </p>

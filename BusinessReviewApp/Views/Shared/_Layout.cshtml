@@ -2,34 +2,43 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <title>@ViewBag.Title - My ASP.NET MVC Application</title>
+        <title>@ViewBag.Title</title>
         <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
         <meta name="viewport" content="width=device-width" />
-        @Styles.Render("~/Content/css")
-        @Scripts.Render("~/bundles/modernizr")
+        
+        @Styles.Render("~/Content/css/customstyle.css")
     </head>
     <body>
         <header>
-            <div class="content-wrapper">
-                <div class="float-left">
-                    <p class="site-title">@Html.ActionLink("Logo", "Index", "Home")</p>
-                </div>
-                <div class="float-right">
-                    <section id="login">
-                        @Html.Partial("_LoginPartial")
-                    </section>
-                    <nav>
-                        <ul id="menu">
-                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
+            <nav class="navbar-wrapper navbar-default navbar-fixed-top" role="navigation">
+                <div class="container">
+                    
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                        </button>
+                        <a class="navbar-brand"><img src="/Images/lookItUpLogo.png" height="40" width="150"></a>
+                    </div>
+
+                    <!-- Navagation Bar -->
+                    <div class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav">
+                            <li class ="active">@Html.ActionLink("Home", "Index", "Home")</li>
+                            <li>@Html.ActionLink("About", "About", "Home")</li>
                             <li>@Html.ActionLink("Businesses", "Index", "Business")</li>
                             <li>@Html.ActionLink("Reviews", "Index", "Review")</li>
-                            <li>@Html.ActionLink("About", "About", "Home")</li>
                             <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                         </ul>
-                    </nav>
-                </div>
-            </div>
+                        <div class="float-right">
+                            <section id="login">
+                                @Html.Partial("_LoginPartial")
+                            </section>
+                        </div>
+                    </div><!-- /.navbar-collapse -->
+                </div>  <!-- Container Close -->
+            </nav>
         </header>
+
         <div id="body">
             @RenderSection("featured", required: false)
             <section class="content-wrapper main-content clear-fix">
@@ -39,7 +48,7 @@
         <footer>
             <div class="content-wrapper">
                 <div class="float-left">
-                    <p>&copy; @DateTime.Now.Year - Business Review Application</p>
+                    <p>&copy; @DateTime.Now.Year - LookItUp, IT Tallaght Dublin</p>
                 </div>
             </div>
         </footer>

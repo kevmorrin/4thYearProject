@@ -4,6 +4,7 @@
     <Instances count="2" />
     <ConfigurationSettings>
       <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="UseDevelopmentStorage=true" />
+      <Setting name="StorageConnectionString" value="DefaultEndpointsProtocol=https;AccountName=lookitup;AccountKey=Sn2mDjB+SV0GQiXwVeHZCeipZroaQielkohYIAn8Mqmk0oZGJlyPBbgxTns8jWwUBAPxD0SCIpJfz4kXnvmWLQ==" />
     </ConfigurationSettings>
   </Role>
 </ServiceConfiguration>

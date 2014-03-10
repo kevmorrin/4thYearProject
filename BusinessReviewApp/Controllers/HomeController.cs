@@ -17,7 +17,7 @@ namespace BusinessReviewApp.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Details about the application.";
+            ViewBag.Message = "LookItUp allows you to view Irish business details, amend their details and write reviews.";
 
             return View();
         }

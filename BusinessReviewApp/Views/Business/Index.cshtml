@@ -15,25 +15,15 @@
     <div class="business-item">
       
         <div class="business-image">
-            <a href ="Business/Details/@Html.DisplayFor(modelItem => item.BusinessID)"><img src="Images/imageNotFound.jpg" height="150" width="200"></a>
+            <a href ="Business/Details/@Html.DisplayFor(modelItem => item.BusinessID)"><img src="http://lookitup.blob.core.windows.net/photos/Photo1.jpg" alt="Images/imageNotFound.jpg" height="150" width="200"></a>
         </div>
         <div class="business-description-brief">
             <a href ="Business/Details/@Html.DisplayFor(modelItem => item.BusinessID)"><b>@Html.DisplayFor(modelItem => item.Name)</b></a><br>
             @Html.DisplayFor(modelItem => item.Street), @Html.DisplayFor(modelItem => item.Town)<br>
             @Html.DisplayFor(modelItem => item.Description).ToString()<br>
-            Price Rating: <img src="Images/@Html.DisplayFor(modelItem => item.PriceRating)StarRating.png" height="30" width="120">
+            Rating: <img src="Images/@Html.DisplayFor(modelItem => item.CombinedReviewRating)StarRating.png" height="30" width="120">
             @Html.ActionLink("Delete", "Delete", new { id=item.BusinessID })
-
-             
         </div>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-
     </div>
 }
 

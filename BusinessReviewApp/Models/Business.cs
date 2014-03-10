@@ -34,7 +34,12 @@ namespace BusinessReviewApp.Models
         public string County { get; set; }
         [Required]
         public string Category { get; set; }
+        [Required]
         public string Description { get; set; }
+        [Required]
+        public DateTime DateTime { get; set; }
+        //This is used to store all the combinations of all review ratings
+        public int CombinedReviewRating { get; set; }
         public string URLPhoto1 { get; set; }
         public string URLPhoto2 { get; set; }
         public string URLPhoto3 { get; set; }
@@ -46,8 +51,8 @@ namespace BusinessReviewApp.Models
         public string Email { get; set; }
         public string WebsiteURL { get; set; }
         public Nullable<int> PriceRating { get; set; }
-        public Nullable<int> SuitableForFamilies { get; set; }
-        public Nullable<int> FastFood { get; set; }
+        public string SuitableForFamilies { get; set; }
+        public string FastFood { get; set; }
 
         public Business()
         {

@@ -37,7 +37,7 @@ namespace BusinessReviewApp.Controllers
 
         //
         // GET: /Review/Create
-        [Authorize]
+
         public ActionResult Create()
         {
             ViewBag.BusinessID = new SelectList(db.Businesses, "BusinessID", "Name");
@@ -88,6 +88,10 @@ namespace BusinessReviewApp.Controllers
                     //Add details
                     db.Reviews.Add(review);
                     db.SaveChanges();
+
+                    //Update Rating for business
+                    calculateRating(review);
+                    
                     return RedirectToAction("Index");
                 }
                
@@ -115,7 +119,7 @@ namespace BusinessReviewApp.Controllers
 
         //
         // POST: /Review/Edit/5
-
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Review review)
@@ -124,6 +128,10 @@ namespace BusinessReviewApp.Controllers
             {
                 db.Entry(review).State = EntityState.Modified;
                 db.SaveChanges();
+
+                //Update Rating for business
+                calculateRating(review);
+                
                 return RedirectToAction("Index");
             }
             ViewBag.BusinessID = new SelectList(db.Businesses, "BusinessID", "Name", review.BusinessID);
@@ -146,7 +154,7 @@ namespace BusinessReviewApp.Controllers
 
         //
         // POST: /Review/Delete/5
-
+        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -154,6 +162,10 @@ namespace BusinessReviewApp.Controllers
             Review review = db.Reviews.Find(id);
             db.Reviews.Remove(review);
             db.SaveChanges();
+
+            //Update Rating for business
+            calculateRating(review);
+
             return RedirectToAction("Index");
         }
 
@@ -161,6 +173,41 @@ namespace BusinessReviewApp.Controllers
         {
             db.Dispose();
             base.Dispose(disposing);
+        }
+
+        //Used for calculation of the rating of a business based on reviews
+        public void calculateRating(Review review)
+        {
+            int totalNumberOfReviews = 0;
+            int totalRating = 0;
+            List<Review> reviews = db.Reviews.ToList();
+
+            //Recalculate the combined review ratings
+            foreach (var item in reviews)
+            {
+                //If item is the same as the business currently being reviewed
+                if (item.BusinessID == review.BusinessID)
+                {
+                    totalNumberOfReviews++;
+                    totalRating += item.Rating;
+                }
+            }
+
+            Business b1 = new Business();
+            b1 = db.Businesses.Find(review.BusinessID);
+            
+            //Check if there are no reviews to ensure there is no divide by 0 exception
+            if (totalNumberOfReviews == 0)
+            {
+                b1.CombinedReviewRating = 0;//Set to 0 if no reviews
+            }
+            else
+            {
+                b1.CombinedReviewRating = totalRating / totalNumberOfReviews;//Calculate average rating
+            }
+
+            db.Entry(b1).State = EntityState.Modified;
+            db.SaveChanges();
         }
     }
 }

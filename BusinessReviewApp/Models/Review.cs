@@ -19,6 +19,7 @@ namespace BusinessReviewApp.Models
         [Required]
         public string Description { get; set; }
         [Required]
+        [Range(0,10)]
         public int Rating { get; set; }
         [Required]
         public int BusinessID { get; set; }

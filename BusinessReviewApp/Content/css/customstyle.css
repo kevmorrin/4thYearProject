@@ -1,0 +1,77 @@
+@import url("./bootstrap.min.css");
+@import url("./bootstrap-theme.css");
+
+footer{
+	border-top: 1px dashed #CCCCCC;
+	margin: 40px 0px;
+	padding: 20px 0px;
+}
+
+
+html { 
+    background-image:url('/Images/background.jpg');
+        margin: 20em;
+    margin-top: 8em;
+}
+
+body { 
+	background: White; 
+    padding: 1em;
+}
+
+/*Nav-bar*/
+.nav>li>a {
+    padding: 25px 35px;
+    font-size: large;
+}
+.nav>li>a:hover {
+    padding: 25px 35px;
+    color: #F7A116;
+}
+
+.navbar-default .navbar-nav>li>a {
+    color: #C9B069;
+}
+.navbar-default .navbar-nav>li>a:hover {
+    color: #FFBC03;
+}
+
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus {
+    color: #FFBC03;
+    text-decoration: underline;
+    /*Override to remove css in bootstrap*/
+    background-image: none;
+    background-color: white;
+    box-shadow: none;
+}
+
+
+header {
+    float: right;
+} 
+
+
+.modal { 
+	text-align: left; 
+}
+
+.text-justify{
+	text-align: justify;
+	font-size: 1.2em;
+}
+
+.login-navbar{
+    float: right;
+    font-size: medium;
+}
+
+/*Create Page*/
+.requiredField {
+    font-size: 1em;
+    color: red;
+    float: right;
+}
+
+.float-right{
+    float: right;
+}
