@@ -17,6 +17,14 @@ using Microsoft.WindowsAzure;
 
 namespace BusinessReviewApp.Controllers
 {
+    public class BusinessReviewViewModel
+    {
+        public Business businesses { get; set; }
+        public List<Review> reviews {get; set; }
+    }
+
+//@model MusicStoreViewModel
+
     public class BusinessController : Controller
     {
         private UsersContext db = new UsersContext();
@@ -34,12 +42,22 @@ namespace BusinessReviewApp.Controllers
 
         public ActionResult Details(int id = 0)
         {
-            Business business = db.Businesses.Find(id);
-            if (business == null)
+            BusinessReviewViewModel businessReviewVM = new BusinessReviewViewModel();
+            businessReviewVM.businesses = db.Businesses.Find(id);
+            if (businessReviewVM.businesses == null)
             {
                 return HttpNotFound();
             }
-            return View(business);
+
+            businessReviewVM.reviews = new List<Review>();
+            foreach (var item in db.Reviews.ToList())
+            {
+                if (item.BusinessID == db.Businesses.Find(id).BusinessID)
+                {
+                    businessReviewVM.reviews.Add(item);
+                }
+            }
+            return View(businessReviewVM);
         }
 
         //

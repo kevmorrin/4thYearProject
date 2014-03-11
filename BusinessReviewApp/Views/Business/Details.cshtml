@@ -1,19 +1,19 @@
-﻿@model BusinessReviewApp.Models.Business
+﻿@model BusinessReviewApp.Controllers.BusinessReviewViewModel
 
 <div >
     <!--Business name and some addresss details at the top of the page-->
-    <h2><b>@Html.DisplayFor(model => model.Name)</b></h2> 
+    <h2><b>@Html.DisplayFor(model => model.businesses.Name)</b></h2> 
     
     <!--Area details for the business-->
     <b>
-        @Html.DisplayFor(model => model.Street),
-        @Html.DisplayFor(model => model.Town),
-        @Html.DisplayFor(model => model.County)
+        @Html.DisplayFor(model => model.businesses.Street),
+        @Html.DisplayFor(model => model.businesses.Town),
+        @Html.DisplayFor(model => model.businesses.County)
     </b>
-    <p>Rating:<img src="/Images/@Html.DisplayFor(model => model.CombinedReviewRating)StarRating.png" height="30" width="120"></p><br>
+    <p>Rating:<img src="/Images/@Html.DisplayFor(model => model.businesses.CombinedReviewRating)StarRating.png" height="30" width="120"></p><br>
     <p>
-        @Html.ActionLink("Add/Edit businesses details", "Edit", new { id = Model.BusinessID })<br>
-        Last updated on: @Html.DisplayFor(model => model.DateTime) 
+        @Html.ActionLink("Add/Edit businesses details", "Edit", new { id = Model.businesses.BusinessID })<br>
+        Last updated on: @Html.DisplayFor(model => model.businesses.DateTime) 
     </p>
 </div>
  
@@ -23,38 +23,44 @@
 <div class="row">
     <div class="col-md-7 text-justify">  <!-- Left Hand Side Of The Page 7/12 In Size -->
         <div class="business-image">
-            <img src="@Html.DisplayFor(model => model.URLPhoto1)" height="300" width="300">
+            <img src="@Html.DisplayFor(model => model.businesses.URLPhoto1)" height="300" width="300">
         </div>
 
          <!--Business Description-->
         <h3>Business Description</h3>
         <div>
-            @Html.DisplayFor(model => model.Description)
+            @Html.DisplayFor(model => model.businesses.Description)
         </div>
 
         <div>
-            <h3>Price Rating</h3>
-            <img src="/Images/@Html.DisplayFor(model => model.PriceRating)StarRating.png" height="30" width="120">
+            @{
+               //Check to see if field is filled
+                if (!Html.DisplayFor(model => model.businesses.PriceRating).ToString().IsEmpty())
+               {
+                    <h3>Price Rating</h3>
+                    <img src="/Images/@Html.DisplayFor(model => model.businesses.PriceRating)StarRating.png" height="30" width="120">
+               }
+           } 
         </div>
 
         <div >
            @{
                //Check to see if field is filled
-               if (!Html.DisplayFor(model => model.SuitableForFamilies).ToString().IsEmpty())
+               if (!Html.DisplayFor(model => model.businesses.SuitableForFamilies).ToString().IsEmpty())
                {
                    <h3>Suitable For Families</h3>
-                    @Html.DisplayFor(model => model.SuitableForFamilies)
+                    @Html.DisplayFor(model => model.businesses.SuitableForFamilies)
                }
            } 
             
         </div>
         @{
             //Check if the category is a restaurant and then if it is fast food.
-            if (Html.DisplayFor(model => model.Category).ToString().Equals("Restaurant") && !Html.DisplayFor(model => model.FastFood).ToString().IsEmpty())
+            if (Html.DisplayFor(model => model.businesses.Category).ToString().Equals("Restaurant") && !Html.DisplayFor(model => model.businesses.FastFood).ToString().IsEmpty())
             {
                 <div>
                     <h3>Fast Food</h3>
-                    @Html.DisplayFor(model => model.FastFood)
+                    @Html.DisplayFor(model => model.businesses.FastFood)
                 </div>
             }
         }
@@ -65,66 +71,82 @@
     <div class="col-md-5 text-justify">  <!-- Left Hand Side Of The Page 5/12 In Size -->
         <h3>Category</h3>
         <div >
-            @Html.DisplayFor(model => model.Category)
+            @Html.DisplayFor(model => model.businesses.Category)
         </div>
 
         <!--Contact Details-->
          @{
           //Check if there are any contact details
-          if (!Html.DisplayFor(model => model.PhoneNumber).ToString().IsEmpty() || !Html.DisplayFor(model => model.Email).ToString().IsEmpty() || !Html.DisplayFor(model => model.WebsiteURL).ToString().IsEmpty())
+             if (!Html.DisplayFor(model => model.businesses.PhoneNumber).ToString().IsEmpty() || !Html.DisplayFor(model => model.businesses.Email).ToString().IsEmpty() || !Html.DisplayFor(model => model.businesses.WebsiteURL).ToString().IsEmpty())
           {
             <h3>Contact Details</h3>
             <div>
                @Html.Label("Address")
             </div>
             //Check if there is an address number
-            if (!Html.DisplayFor(model => model.Number).ToString().IsEmpty())
+              if (!Html.DisplayFor(model => model.businesses.Number).ToString().IsEmpty())
             {
-               @Html.DisplayFor(model => model.Number)<br>
+               @Html.DisplayFor(model => model.businesses.Number)<br>
             }
-            @Html.DisplayFor(model => model.Street)<br>
-            @Html.DisplayFor(model => model.Town)<br>
-            @Html.DisplayFor(model => model.County)<br>
-            if (!Html.DisplayFor(model => model.Postcode).ToString().IsEmpty())
+            @Html.DisplayFor(model => model.businesses.Street)<br>
+            @Html.DisplayFor(model => model.businesses.Town)<br>
+            @Html.DisplayFor(model => model.businesses.County)<br>
+              if (!Html.DisplayFor(model => model.businesses.Postcode).ToString().IsEmpty())
             {
-               @Html.DisplayFor(model => model.Postcode)<br>
+               @Html.DisplayFor(model => model.businesses.Postcode)<br>
             }
              
                 //Check if there is a phone number and display it if there is.
-                if(!Html.DisplayFor(model => model.PhoneNumber).ToString().IsEmpty())
+              if (!Html.DisplayFor(model => model.businesses.PhoneNumber).ToString().IsEmpty())
                 {
                     <div>
-                        @Html.LabelFor(model => model.PhoneNumber)
+                        @Html.LabelFor(model => model.businesses.PhoneNumber)
                     </div>
                     <div>
-                        @Html.DisplayFor(model => model.PhoneNumber)
+                        @Html.DisplayFor(model => model.businesses.PhoneNumber)
                     </div>
                    <br>
                 }
                 
                 //Check if there is a email and display it if there is.
-                if(!Html.DisplayFor(model => model.Email).ToString().IsEmpty())
+              if (!Html.DisplayFor(model => model.businesses.Email).ToString().IsEmpty())
                 {
                     <div>
-                        @Html.LabelFor(model => model.Email)
+                        @Html.LabelFor(model => model.businesses.Email)
                     </div>
                     <div>
-                        @Html.DisplayFor(model => model.Email)
+                        @Html.DisplayFor(model => model.businesses.Email)
                     </div>
                     <br>
                 }
                 //Check if there is a website URL and display it if there is.
-                if (!Html.DisplayFor(model => model.WebsiteURL).ToString().IsEmpty())
+              if (!Html.DisplayFor(model => model.businesses.WebsiteURL).ToString().IsEmpty())
                 {
                     <div>
-                        @Html.LabelFor(model => model.WebsiteURL)
+                        @Html.LabelFor(model => model.businesses.WebsiteURL)
                     </div>
                     <div>
-                        @Html.DisplayFor(model => model.WebsiteURL)
+                        @Html.DisplayFor(model => model.businesses.WebsiteURL)
                     </div>
-                }    
+                }
             }
         }
-
     </div>
+</div>
+    <hr>
+ <div class="col-md-12 text-justify">
+    <h2>Reviews</h2>
+    <p>
+        @Html.ActionLink("Write a review", "Create", "Review")
+    </p>
+
+    @{
+        foreach (var review in Model.reviews)
+        {
+            <b>@review.UserProfile.UserName.ToString().ToUpper()</b>
+            <p>Rating: <img src="/Images/@review.Rating.ToString()StarRating.png" height="30" width="120"><br></p>
+            @review.Description.ToString()<br>
+            <hr>
+        }  
+    }
 </div>
