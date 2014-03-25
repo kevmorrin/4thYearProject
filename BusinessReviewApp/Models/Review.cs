@@ -21,9 +21,7 @@ namespace BusinessReviewApp.Models
         [Required]
         [Range(0,10)]
         public int Rating { get; set; }
-        [Required]
         public int BusinessID { get; set; }
-        [Required]
         public int UserId { get; set; }
 
         public virtual Business Business { get; set; }

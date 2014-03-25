@@ -9,18 +9,29 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-
+ 
 @foreach (var item in Model) 
 {
     <div class="business-item">
       
         <div class="business-image">
-            <a href ="Business/Details/@Html.DisplayFor(modelItem => item.BusinessID)"><img src="http://lookitup.blob.core.windows.net/photos/Photo1.jpg" alt="Images/imageNotFound.jpg" height="150" width="200"></a>
+            <a href ="Business/Details/@Html.DisplayFor(modelItem => item.BusinessID)"><img src="@Html.DisplayFor(model => item.URLPhoto1)" alt="Images/imageNotFound.jpg" height="200" width="200"></a>
         </div>
         <div class="business-description-brief">
             <a href ="Business/Details/@Html.DisplayFor(modelItem => item.BusinessID)"><b>@Html.DisplayFor(modelItem => item.Name)</b></a><br>
             @Html.DisplayFor(modelItem => item.Street), @Html.DisplayFor(modelItem => item.Town)<br>
-            @Html.DisplayFor(modelItem => item.Description).ToString()<br>
+            <!--Check if description is greater than 200 characters and truncate it if it is-->
+            @if(item.Description.ToString().Length < 200)
+            {
+                @Html.DisplayFor(modelItem => item.Description).ToString()<br>
+            }
+            else
+            {
+                @Html.DisplayFor(modelItem => item.Description).ToString().Substring(0,200)
+                @Html.ActionLink("..More", "Details", new { id=item.BusinessID })<br>
+            }
+            
+            
             Rating: <img src="Images/@Html.DisplayFor(modelItem => item.CombinedReviewRating)StarRating.png" height="30" width="120">
             @Html.ActionLink("Delete", "Delete", new { id=item.BusinessID })
         </div>

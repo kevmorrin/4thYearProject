@@ -54,6 +54,24 @@ namespace BusinessReviewApp.Controllers
         {
             if (ModelState.IsValid)
             {
+                //Set the user equal to the currently logged in user
+                foreach (var item in db.UserProfiles)
+                {
+                    if (item.UserName == User.Identity.Name)
+                    {
+                        review.UserId = item.UserId;
+                    }
+                }
+
+                //Set the user equal to the business currently being reviewed
+                foreach (var item in db.UserProfiles)
+                {
+                    if (item.UserName == User.Identity.Name)
+                    {
+                        review.UserId = item.UserId;
+                    }
+                }
+
                 //Assume business review for that user already exists
                 bool reviewAlreadyExists = false;
 
@@ -75,7 +93,7 @@ namespace BusinessReviewApp.Controllers
                     if (item.UserId == review.UserId)
                     {
                         reviewAlreadyExists = true;
-                    }
+                    }              
                 }
 
                 //Check if a review for this business from this user does not already exist
