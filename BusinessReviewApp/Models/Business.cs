@@ -45,8 +45,8 @@ namespace BusinessReviewApp.Models
         public string URLPhoto3 { get; set; }
         public string URLPhoto4 { get; set; }
         public string URLPhoto5 { get; set; }
-        public Nullable<decimal> DecimalLatitude { get; set; }
-        public Nullable<decimal> DecimalLongtitude { get; set; }
+        public Nullable<float> DecimalLatitude { get; set; }
+        public Nullable<float> DecimalLongtitude { get; set; }
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
         public string WebsiteURL { get; set; }

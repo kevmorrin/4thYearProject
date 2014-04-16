@@ -14,6 +14,7 @@ using Microsoft.WindowsAzure.Storage.Auth;
 using Microsoft.WindowsAzure.Storage.Blob;
 using System.Configuration;
 using Microsoft.WindowsAzure;
+using System.IO;
 
 namespace BusinessReviewApp.Controllers
 {
@@ -152,7 +153,7 @@ namespace BusinessReviewApp.Controllers
                 //Update the Rating
                 business.CombinedReviewRating = calculateRating(business);
                 //Update the BLOBs
-                UpdateBLOBs(business);
+                //UpdateBLOBs(business);
 
                 db.Entry(business).State = EntityState.Modified;
                 db.SaveChanges();
@@ -161,7 +162,6 @@ namespace BusinessReviewApp.Controllers
             return View(business);
         }
 
-        //
         // GET: /Business/Delete/5
 
         public ActionResult Delete(int id = 0)
@@ -231,6 +231,41 @@ namespace BusinessReviewApp.Controllers
         //Called when all blobs for a business need to be deleted
         public void DeleteBLOBs(Business business)
         {
+            /*Create a list to store all the urls of the photos
+            List<String> businessPhotoURLs = new List<String>();
+
+            //Check all the urls in the business to see which ones contain links to images
+            //The ifs are nested as the uploader will only allow the next url to be entered after the previous one has been filled in
+            if (business.URLPhoto1 != null)
+            {
+                businessPhotoURLs.Add(business.URLPhoto1);
+                if (business.URLPhoto2 != null)
+                {
+                    businessPhotoURLs.Add(business.URLPhoto2);
+                    if (business.URLPhoto3 != null)
+                    {
+                        businessPhotoURLs.Add(business.URLPhoto3);
+                        if (business.URLPhoto4 != null)
+                        {
+                            businessPhotoURLs.Add(business.URLPhoto4);
+                            if (business.URLPhoto5 != null)
+                            {
+                                businessPhotoURLs.Add(business.URLPhoto5);
+                            }
+                        }
+                    }
+
+                }
+            }
+
+            //For all of the urls that are stored
+            for (int i = 1; i <= businessPhotoURLs.Count; i ++ )
+            {
+                CloudBlockBlob blockBlob = container.GetBlockBlobReference(business.Name + business.Street + business.County + "Photo" + i + ".jpg");
+                // Delete the blob.
+                blockBlob.Delete();
+            }*/
+
             //Delete all the blobs associated with the account
             if (business.URLPhoto1 != null)
             {
@@ -273,12 +308,9 @@ namespace BusinessReviewApp.Controllers
                 CloudBlockBlob blockBlob = container.GetBlockBlobReference(business.Name + business.Street + business.County + "Photo1.jpg");
                 using (var fileStream = System.IO.File.OpenRead(@business.URLPhoto1))
                 {
-                    //Change from upload to stream to another alternative e.g.
-                    //blockBlob.UploadFromByteArray(parameters....);
                     blockBlob.UploadFromStream(fileStream);
-                    //Set URL in database to point to BLOB
                     business.URLPhoto1 = "http://lookitup.blob.core.windows.net/photos/" + business.Name + business.Street + business.County + "Photo1.jpg";
-                }
+                   }
             }
             else
             {

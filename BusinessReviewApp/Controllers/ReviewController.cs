@@ -37,7 +37,7 @@ namespace BusinessReviewApp.Controllers
 
         //
         // GET: /Review/Create
-
+         [Authorize]
         public ActionResult Create()
         {
             ViewBag.BusinessID = new SelectList(db.Businesses, "BusinessID", "Name");
@@ -122,7 +122,7 @@ namespace BusinessReviewApp.Controllers
 
         //
         // GET: /Review/Edit/5
-
+        [Authorize]
         public ActionResult Edit(int id = 0)
         {
             Review review = db.Reviews.Find(id);
@@ -159,7 +159,7 @@ namespace BusinessReviewApp.Controllers
 
         //
         // GET: /Review/Delete/5
-
+        [Authorize]
         public ActionResult Delete(int id = 0)
         {
             Review review = db.Reviews.Find(id);

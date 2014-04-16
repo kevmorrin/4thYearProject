@@ -75,3 +75,9 @@ header {
 .float-right{
     float: right;
 }
+
+/*Google Maps*/
+
+#map_canvas { 
+    height: 350px;
+}
