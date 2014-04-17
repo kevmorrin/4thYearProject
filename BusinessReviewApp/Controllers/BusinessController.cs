@@ -21,10 +21,10 @@ namespace BusinessReviewApp.Controllers
     public class BusinessReviewViewModel
     {
         public Business businesses { get; set; }
-        public List<Review> reviews {get; set; }
+        public List<Review> reviews { get; set; }
     }
 
-//@model MusicStoreViewModel
+    //@model MusicStoreViewModel
 
     public class BusinessController : Controller
     {
@@ -98,7 +98,7 @@ namespace BusinessReviewApp.Controllers
             }
 
             RecaptchaVerificationResult recaptchaResult = await recaptchaHelper.VerifyRecaptchaResponseTaskAsync();
-            
+
             //Check if captcha is not a success
             if (recaptchaResult != RecaptchaVerificationResult.Success)
             {
@@ -115,7 +115,7 @@ namespace BusinessReviewApp.Controllers
 
                     //Add business if model and captcha are valid 
                     db.Businesses.Add(business);
-                    
+
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
@@ -144,7 +144,7 @@ namespace BusinessReviewApp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Business business, HttpPostedFileBase file)
+        public ActionResult Edit(Business business, HttpPostedFileBase[] files)
         {
             if (ModelState.IsValid)
             {
@@ -153,19 +153,7 @@ namespace BusinessReviewApp.Controllers
                 //Update the Rating
                 business.CombinedReviewRating = calculateRating(business);
                 //Update the BLOBs
-                //UpdateBLOBs(business);
-
-                if (file != null && file.ContentLength > 0)
-                    try
-                    {
-                        CloudBlockBlob blockBlob = container.GetBlockBlobReference(business.Name + business.Street + business.County + "Photo1.jpg");
-                        blockBlob.UploadFromStream(file.InputStream);
-                        business.URLPhoto1 = "http://lookitup.blob.core.windows.net/photos/" + business.Name + business.Street + business.County + "Photo1.jpg";
-                    }
-                    catch (Exception ex)
-                    {
-                        ViewBag.Message = "ERROR:" + ex.Message.ToString();
-                    }
+                UpdateBLOBs(business, files);
 
                 db.Entry(business).State = EntityState.Modified;
                 db.SaveChanges();
@@ -181,9 +169,6 @@ namespace BusinessReviewApp.Controllers
             Business business = db.Businesses.Find(id);
             if (business == null)
             {
-                //Delete all the BLOBs associated with the business
-                DeleteBLOBs(business);
-
                 return HttpNotFound();
             }
             return View(business);
@@ -198,6 +183,9 @@ namespace BusinessReviewApp.Controllers
         {
             Business business = db.Businesses.Find(id);
             db.Businesses.Remove(business);
+            //Delete all the BLOBs associated with the business
+            DeleteBLOBs(business);
+
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -243,135 +231,150 @@ namespace BusinessReviewApp.Controllers
         //Called when all blobs for a business need to be deleted
         public void DeleteBLOBs(Business business)
         {
-            /*Create a list to store all the urls of the photos
-            List<String> businessPhotoURLs = new List<String>();
-
-            //Check all the urls in the business to see which ones contain links to images
-            //The ifs are nested as the uploader will only allow the next url to be entered after the previous one has been filled in
+            CloudBlockBlob blockBlob;
             if (business.URLPhoto1 != null)
             {
-                businessPhotoURLs.Add(business.URLPhoto1);
-                if (business.URLPhoto2 != null)
-                {
-                    businessPhotoURLs.Add(business.URLPhoto2);
-                    if (business.URLPhoto3 != null)
-                    {
-                        businessPhotoURLs.Add(business.URLPhoto3);
-                        if (business.URLPhoto4 != null)
-                        {
-                            businessPhotoURLs.Add(business.URLPhoto4);
-                            if (business.URLPhoto5 != null)
-                            {
-                                businessPhotoURLs.Add(business.URLPhoto5);
-                            }
-                        }
-                    }
-
-                }
-            }
-
-            //For all of the urls that are stored
-            for (int i = 1; i <= businessPhotoURLs.Count; i ++ )
-            {
-                CloudBlockBlob blockBlob = container.GetBlockBlobReference(business.Name + business.Street + business.County + "Photo" + i + ".jpg");
-                // Delete the blob.
-                blockBlob.Delete();
-            }*/
-
-            //Delete all the blobs associated with the account
-            if (business.URLPhoto1 != null)
-            {
-                CloudBlockBlob blockBlob = container.GetBlockBlobReference(business.Name + business.Street + business.County + "Photo1.jpg");
+                blockBlob = container.GetBlockBlobReference(business.Name + business.Street + business.County + "Photo1.jpg");
                 // Delete the blob.
                 blockBlob.Delete();
             }
             if (business.URLPhoto2 != null)
             {
-                CloudBlockBlob blockBlob = container.GetBlockBlobReference(business.Name + business.Street + business.County + "Photo2.jpg");
+                blockBlob = container.GetBlockBlobReference(business.Name + business.Street + business.County + "Photo2.jpg");
                 // Delete the blob.
                 blockBlob.Delete();
             }
             if (business.URLPhoto3 != null)
             {
-                CloudBlockBlob blockBlob = container.GetBlockBlobReference(business.Name + business.Street + business.County + "Photo3.jpg");
+                blockBlob = container.GetBlockBlobReference(business.Name + business.Street + business.County + "Photo3.jpg");
                 // Delete the blob.
                 blockBlob.Delete();
             }
             if (business.URLPhoto4 != null)
             {
-                CloudBlockBlob blockBlob = container.GetBlockBlobReference(business.Name + business.Street + business.County + "Photo4.jpg");
+                blockBlob = container.GetBlockBlobReference(business.Name + business.Street + business.County + "Photo4.jpg");
                 // Delete the blob.
                 blockBlob.Delete();
             }
             if (business.URLPhoto5 != null)
             {
-                CloudBlockBlob blockBlob = container.GetBlockBlobReference(business.Name + business.Street + business.County + "Photo5.jpg");
+                blockBlob = container.GetBlockBlobReference(business.Name + business.Street + business.County + "Photo5.jpg");
                 // Delete the blob.
                 blockBlob.Delete();
             }
+
         }
 
-        public void UpdateBLOBs(Business business)
+        //Called when editing blobs
+        public void UpdateBLOBs(Business business, HttpPostedFileBase[] files)
         {
-            /*-----------------------UPDATE BLOB STORAGE-----------------*/
-            //Upload photos for the business if the local image URLs are entered
-            if (business.URLPhoto1 != null)
+            if (files[0] != null && files[0].ContentLength > 0)
             {
-                CloudBlockBlob blockBlob = container.GetBlockBlobReference(business.Name + business.Street + business.County + "Photo1.jpg");
-                using (var fileStream = System.IO.File.OpenRead(@business.URLPhoto1))
+                try
                 {
-                    blockBlob.UploadFromStream(fileStream);
-                    business.URLPhoto1 = "http://lookitup.blob.core.windows.net/photos/" + business.Name + business.Street + business.County + "Photo1.jpg";
-                 }
-            }
-            else
-            {
-                CloudBlockBlob blockBlob = container.GetBlockBlobReference(business.Name + business.Street + business.County + "Photo1.jpg");
-
-                // Delete the blob.
-                blockBlob.Delete();
-            }
-
-            if (business.URLPhoto2 != null)
-            {
-                CloudBlockBlob blockBlob = container.GetBlockBlobReference(business.Name + business.Street + business.County + "Photo2.jpg");
-                using (var fileStream = System.IO.File.OpenRead(@business.URLPhoto2))
+                   CloudBlockBlob blockBlob = container.GetBlockBlobReference(business.Name + business.Street + business.County + "Photo1.jpg");
+                   blockBlob.UploadFromStream(files[0].InputStream);
+                   business.URLPhoto1 = "http://lookitup.blob.core.windows.net/photos/" + business.Name + business.Street + business.County + "Photo1.jpg";
+                }
+                catch(Exception ex)
                 {
-                    blockBlob.UploadFromStream(fileStream);
+                    
+                }
+            }
+            if (files[1] != null && files[1].ContentLength > 0)
+            {
+                try
+                {
+                    CloudBlockBlob blockBlob = container.GetBlockBlobReference(business.Name + business.Street + business.County + "Photo2.jpg");
+                    blockBlob.UploadFromStream(files[1].InputStream);
                     business.URLPhoto2 = "http://lookitup.blob.core.windows.net/photos/" + business.Name + business.Street + business.County + "Photo2.jpg";
+                }
+                catch (Exception ex)
+                {
 
                 }
             }
-
-            if (business.URLPhoto3 != null)
+            if (files[2] != null && files[2].ContentLength > 0)
             {
-                CloudBlockBlob blockBlob = container.GetBlockBlobReference(business.Name + business.Street + business.County + "Photo3.jpg");
-                using (var fileStream = System.IO.File.OpenRead(@business.URLPhoto3))
+                try
                 {
-                    blockBlob.UploadFromStream(fileStream);
+                    CloudBlockBlob blockBlob = container.GetBlockBlobReference(business.Name + business.Street + business.County + "Photo3.jpg");
+                    blockBlob.UploadFromStream(files[2].InputStream);
                     business.URLPhoto3 = "http://lookitup.blob.core.windows.net/photos/" + business.Name + business.Street + business.County + "Photo3.jpg";
                 }
-            }
-
-            if (business.URLPhoto4 != null)
-            {
-                CloudBlockBlob blockBlob = container.GetBlockBlobReference(business.Name + business.Street + business.County + "Photo4.jpg");
-                using (var fileStream = System.IO.File.OpenRead(@business.URLPhoto4))
+                catch (Exception ex)
                 {
-                    blockBlob.UploadFromStream(fileStream);
+
+                }
+            }
+            if (files[3] != null && files[3].ContentLength > 0)
+            {
+                try
+                {
+                    CloudBlockBlob blockBlob = container.GetBlockBlobReference(business.Name + business.Street + business.County + "Photo4.jpg");
+                    blockBlob.UploadFromStream(files[3].InputStream);
                     business.URLPhoto4 = "http://lookitup.blob.core.windows.net/photos/" + business.Name + business.Street + business.County + "Photo4.jpg";
                 }
-            }
-
-            if (business.URLPhoto5 != null)
-            {
-                CloudBlockBlob blockBlob = container.GetBlockBlobReference(business.Name + business.Street + business.County + "Photo5.jpg");
-                using (var fileStream = System.IO.File.OpenRead(@business.URLPhoto5))
+                catch (Exception ex)
                 {
-                    blockBlob.UploadFromStream(fileStream);
-                    business.URLPhoto5 = "http://lookitup.blob.core.windows.net/photos/" + business.Name + business.Street + business.County + "Photo5.jpg";
+
                 }
             }
+            if (files[4] != null && files[4].ContentLength > 0)
+            {
+                try
+                {
+                    CloudBlockBlob blockBlob = container.GetBlockBlobReference(business.Name + business.Street + business.County + "Photo4.jpg");
+                    blockBlob.UploadFromStream(files[3].InputStream);
+                    business.URLPhoto5 = "http://lookitup.blob.core.windows.net/photos/" + business.Name + business.Street + business.County + "Photo4.jpg";
+                }
+                catch (Exception ex)
+                {
+
+                }
+            }
+
+            /*for (int i = 0; i < files.Length; i++)
+            {
+                if (files[i] != null && files[i].ContentLength > 0)
+                {
+                    try
+                    {
+                        CloudBlockBlob blockBlob = container.GetBlockBlobReference(business.Name + business.Street + business.County + "Photo" + (i + 1) + ".jpg");
+                        blockBlob.UploadFromStream(files[i].InputStream);
+                        //Go through each photo to see what url should be updated
+                        if (i == 0)
+                        {
+                            business.URLPhoto1 = "http://lookitup.blob.core.windows.net/photos/" + business.Name + business.Street + business.County + "Photo" + (i + 1) + ".jpg";
+                        }
+                        else if (i == 1)
+                        {
+                            business.URLPhoto2 = "http://lookitup.blob.core.windows.net/photos/" + business.Name + business.Street + business.County + "Photo" + (i + 1) + ".jpg";
+                        }
+                        else if (i == 2)
+                        {
+                            business.URLPhoto3 = "http://lookitup.blob.core.windows.net/photos/" + business.Name + business.Street + business.County + "Photo" + (i + 1) + ".jpg";
+                        }
+                        else if (i == 3)
+                        {
+                            business.URLPhoto4 = "http://lookitup.blob.core.windows.net/photos/" + business.Name + business.Street + business.County + "Photo" + (i + 1) + ".jpg";
+                        }
+                        else if (i == 4)
+                        {
+                            business.URLPhoto5 = "http://lookitup.blob.core.windows.net/photos/" + business.Name + business.Street + business.County + "Photo" + (i + 1) + ".jpg";
+                        }
+
+                    }
+                    catch (Exception ex)
+                    {
+
+                    }
+                }
+                else if(business)
+                {
+
+                }
+            }*/
         }
     }
 }

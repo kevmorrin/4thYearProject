@@ -19,7 +19,7 @@
         </div>
         <div class="business-description-brief">
             <a href ="Business/Details/@Html.DisplayFor(modelItem => item.BusinessID)"><b>@Html.DisplayFor(modelItem => item.Name)</b></a><br>
-            @Html.DisplayFor(modelItem => item.Street), @Html.DisplayFor(modelItem => item.Town)<br>
+            <b>@Html.DisplayFor(modelItem => item.Street), @Html.DisplayFor(modelItem => item.Town)</b><br>
             <!--Check if description is greater than 200 characters and truncate it if it is-->
             @if(item.Description.ToString().Length < 200)
             {

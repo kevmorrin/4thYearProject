@@ -84,13 +84,16 @@
             @Html.LabelFor(model => model.URLPhoto1)
         </div>
         <div class="editor-field">
-             <input type="file" name="file" id="file" />
+            <input type="file" name="files" id="file1" />
+            @Html.EditorFor(model => model.URLPhoto1)
+            @Html.ValidationMessageFor(model => model.URLPhoto1)
         </div>
 
         <div class="editor-label">
             @Html.LabelFor(model => model.URLPhoto2)
         </div>
         <div class="editor-field">
+            <input type="file" name="files" id="file2" />
             @Html.EditorFor(model => model.URLPhoto2)
             @Html.ValidationMessageFor(model => model.URLPhoto2)
         </div>
@@ -99,6 +102,7 @@
             @Html.LabelFor(model => model.URLPhoto3)
         </div>
         <div class="editor-field">
+            <input type="file" name="files" id="file3" />
             @Html.EditorFor(model => model.URLPhoto3)
             @Html.ValidationMessageFor(model => model.URLPhoto3)
         </div>
@@ -107,6 +111,7 @@
             @Html.LabelFor(model => model.URLPhoto4)
         </div>
         <div class="editor-field">
+            <input type="file" name="files" id="file4" />
             @Html.EditorFor(model => model.URLPhoto4)
             @Html.ValidationMessageFor(model => model.URLPhoto4)
         </div>
@@ -115,6 +120,7 @@
             @Html.LabelFor(model => model.URLPhoto5)
         </div>
         <div class="editor-field">
+            <input type="file" name="files" id="file5" />
             @Html.EditorFor(model => model.URLPhoto5)
             @Html.ValidationMessageFor(model => model.URLPhoto5)
         </div>

@@ -8,8 +8,7 @@
     var map;
     var address
 
-    function initialize()
-    {
+    function initialize() {
         geocoder = new google.maps.Geocoder();
 
         var myLatlng = new google.maps.LatLng(53.397, -6);
@@ -24,8 +23,7 @@
         address = "@Model.businesses.Street," + "@Model.businesses.Town," + "@Model.businesses.County," + "@Model.businesses.Postcode," + "Ireland";
 
         geocoder.geocode({ 'address': address, 'region': 'ire' }, function (results, status) {
-            if (status == google.maps.GeocoderStatus.OK)
-            {
+            if (status == google.maps.GeocoderStatus.OK) {
                 map.setCenter(results[0].geometry.location);
                 var marker = new google.maps.Marker({
                     map: map,
@@ -40,31 +38,33 @@
 
 <div>
     <!--Business name and some addresss details at the top of the page-->
-    <h2><b>@Html.DisplayFor(model => model.businesses.Name)</b></h2> 
-    
+    <h2><b>@Html.DisplayFor(model => model.businesses.Name)</b></h2>
+
     <!--Area details for the business-->
     <b>
         @Html.DisplayFor(model => model.businesses.Street),
         @Html.DisplayFor(model => model.businesses.Town),
         @Html.DisplayFor(model => model.businesses.County)
     </b>
-    <p>Average Review Rating:<img src="/Images/@Html.DisplayFor(model => model.businesses.CombinedReviewRating)StarRating.png" height="30" width="120"></p><br>
+    <p>Average Review Rating:<img src="/Images/@Html.DisplayFor(model => model.businesses.CombinedReviewRating)StarRating.png" height="30" width="120"></p>
+    <br>
     <p>
         @Html.ActionLink("Add/Edit businesses details", "Edit", new { id = Model.businesses.BusinessID })<br>
-        Last updated on: @Html.DisplayFor(model => model.businesses.DateTime) 
+        Last updated on: @Html.DisplayFor(model => model.businesses.DateTime)
     </p>
 </div>
- 
+
 <!--Use a line across the top of the page to break up content-->
 <hr>
 
 <div class="row">
-    <div class="col-md-7 text-justify">  <!-- Left Hand Side Of The Page 7/12 In Size -->
+    <div class="col-md-7 text-justify">
+        <!-- Left Hand Side Of The Page 7/12 In Size -->
         <div class="business-image">
-            <img src="@Html.DisplayFor(model => model.businesses.URLPhoto1)" height="300" width="300">
+            <img src="@Html.DisplayFor(model => model.businesses.URLPhoto1)" height="300" width="300"  alt="No image found" onError="this.src='Images/noPhotoAvailable.png';">
         </div>
-         
-         <!--Business Description-->
+
+        <!--Business Description-->
         <h3>Business Description</h3>
         <div>
             @Html.DisplayFor(model => model.businesses.Description)
@@ -72,111 +72,110 @@
 
         <div>
             @{
-               //Check to see if field is filled
+                //Check to see if field is filled
                 if (!Html.DisplayFor(model => model.businesses.PriceRating).ToString().IsEmpty())
-               {
-                    <h3>Price Rating</h3>
-                    <img src="/Images/@Html.DisplayFor(model => model.businesses.PriceRating)StarRating.png" height="30" width="120">
-               }
-           } 
+                {
+                <h3>Price Rating</h3>
+                <img src="/Images/@Html.DisplayFor(model => model.businesses.PriceRating)StarRating.png" height="30" width="120">
+                }
+            }
         </div>
 
-        <div >
-           @{
-               //Check to see if field is filled
-               if (!Html.DisplayFor(model => model.businesses.SuitableForFamilies).ToString().IsEmpty())
-               {
-                   <h3>Suitable For Families</h3>
-                    @Html.DisplayFor(model => model.businesses.SuitableForFamilies)
-               }
-           } 
-            
+        <div>
+            @{
+                //Check to see if field is filled
+                if (!Html.DisplayFor(model => model.businesses.SuitableForFamilies).ToString().IsEmpty())
+                {
+                <h3>Suitable For Families</h3>
+                @Html.DisplayFor(model => model.businesses.SuitableForFamilies)
+                }
+            }
+
         </div>
         @{
             //Check if the category is a restaurant and then if it is fast food.
             if (Html.DisplayFor(model => model.businesses.Category).ToString().Equals("Restaurant") && !Html.DisplayFor(model => model.businesses.FastFood).ToString().IsEmpty())
             {
-                <div>
-                    <h3>Fast Food</h3>
-                    @Html.DisplayFor(model => model.businesses.FastFood)
-                </div>
+            <div>
+                <h3>Fast Food</h3>
+                @Html.DisplayFor(model => model.businesses.FastFood)
+            </div>
             }
         }
 
-        
+
     </div>
-      
-    <div class="col-md-5 text-justify">  <!-- Left Hand Side Of The Page 5/12 In Size -->
+
+    <div class="col-md-5 text-justify">
+        <!-- Left Hand Side Of The Page 5/12 In Size -->
         <h3>Category</h3>
-        <div >
+        <div>
             @Html.DisplayFor(model => model.businesses.Category)
         </div>
 
         <!--Contact Details-->
-         @{
-          //Check if there are any contact details
-             if (!Html.DisplayFor(model => model.businesses.PhoneNumber).ToString().IsEmpty() || !Html.DisplayFor(model => model.businesses.Email).ToString().IsEmpty() || !Html.DisplayFor(model => model.businesses.WebsiteURL).ToString().IsEmpty())
-          {
+        @{
             <h3>Contact Details</h3>
             <div>
-               @Html.Label("Address")
+                @Html.Label("Address")
             </div>
             //Check if there is an address number
-              if (!Html.DisplayFor(model => model.businesses.Number).ToString().IsEmpty())
+            if (!Html.DisplayFor(model => model.businesses.Number).ToString().IsEmpty())
             {
-               @Html.DisplayFor(model => model.businesses.Number)<br>
+            @Html.DisplayFor(model => model.businesses.Number)<br>
             }
             @Html.DisplayFor(model => model.businesses.Street)<br>
             @Html.DisplayFor(model => model.businesses.Town)<br>
             @Html.DisplayFor(model => model.businesses.County)<br>
-              if (!Html.DisplayFor(model => model.businesses.Postcode).ToString().IsEmpty())
+            if (!Html.DisplayFor(model => model.businesses.Postcode).ToString().IsEmpty())
             {
-               @Html.DisplayFor(model => model.businesses.Postcode)<br>
+            @Html.DisplayFor(model => model.businesses.Postcode)<br>
             }
-             
-                //Check if there is a phone number and display it if there is.
-              if (!Html.DisplayFor(model => model.businesses.PhoneNumber).ToString().IsEmpty())
-                {
-                    <div>
-                        @Html.LabelFor(model => model.businesses.PhoneNumber)
-                    </div>
-                    <div>
-                        @Html.DisplayFor(model => model.businesses.PhoneNumber)
-                    </div>
-                   <br>
-                }
-                
-                //Check if there is a email and display it if there is.
-              if (!Html.DisplayFor(model => model.businesses.Email).ToString().IsEmpty())
-                {
-                    <div>
-                        @Html.LabelFor(model => model.businesses.Email)
-                    </div>
-                    <div>
-                        @Html.DisplayFor(model => model.businesses.Email)
-                    </div>
-                    <br>
-                }
-                //Check if there is a website URL and display it if there is.
-              if (!Html.DisplayFor(model => model.businesses.WebsiteURL).ToString().IsEmpty())
-                {
-                    <div>
-                        @Html.LabelFor(model => model.businesses.WebsiteURL)
-                    </div>
-                    <div>
-                        <a href="@Html.DisplayFor(model => model.businesses.WebsiteURL)" target="_blank">@Html.DisplayFor(model => model.businesses.WebsiteURL)</a>
-                    </div>
-                }
+
+            //Check if there is a phone number and display it if there is.
+            if (!Html.DisplayFor(model => model.businesses.PhoneNumber).ToString().IsEmpty())
+            {
+            <div>
+                @Html.LabelFor(model => model.businesses.PhoneNumber)
+            </div>
+            <div>
+                @Html.DisplayFor(model => model.businesses.PhoneNumber)
+            </div>
+            <br>
+            }
+
+            //Check if there is a email and display it if there is.
+            if (!Html.DisplayFor(model => model.businesses.Email).ToString().IsEmpty())
+            {
+            <div>
+                @Html.LabelFor(model => model.businesses.Email)
+            </div>
+            <div>
+                @Html.DisplayFor(model => model.businesses.Email)
+            </div>
+            <br>
+            }
+            //Check if there is a website URL and display it if there is.
+            if (!Html.DisplayFor(model => model.businesses.WebsiteURL).ToString().IsEmpty())
+            {
+            <div>
+                @Html.LabelFor(model => model.businesses.WebsiteURL)
+            </div>
+            <div>
+                <a href="@Html.DisplayFor(model => model.businesses.WebsiteURL)" target="_blank">@Html.DisplayFor(model => model.businesses.WebsiteURL)</a>
+            </div>
             }
         }
     </div>
 </div>
-    <hr>
- <div class="col-md-12 text-justify">
-     <h2>Map</h2>
-     <div id="map_canvas"></div>
-     <p><i>Note: The pins on the map are automatically generated based on the address specified. 
-         They may not always be completely accurate and if an address is incorrect it may not show on the map.</i></p>
+<hr>
+<div class="col-md-12 text-justify">
+    <h2>Map</h2>
+    <div id="map_canvas"></div>
+    <p>
+        <i>Note: The pins on the map are automatically generated based on the address specified. 
+         They may not always be completely accurate and if an address is incorrect it may not show on the map.</i>
+    </p>
     <h2>Reviews</h2>
     <p>
         @Html.ActionLink("Write a review", "Create", "Review")
@@ -185,10 +184,12 @@
     @{
         foreach (var review in Model.reviews)
         {
-            <b>@review.UserProfile.UserName.ToString().ToUpper()</b>
-            <p>Rating: <img src="/Images/@review.Rating.ToString()StarRating.png" height="30" width="120"><br></p>
-            @review.Description.ToString()<br>
-            <hr>
+        <b>@review.UserProfile.UserName.ToString().ToUpper()</b>
+        <p>Rating:
+            <img src="/Images/@review.Rating.ToString()StarRating.png" height="30" width="120"><br>
+        </p>
+        @review.Description.ToString()<br>
+        <hr>
         }  
     }
 </div>
