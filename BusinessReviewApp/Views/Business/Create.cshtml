@@ -7,7 +7,8 @@
 
 <h2>Create</h2>
 
-@using (Html.BeginForm()) {
+@using (Html.BeginForm())
+{
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
@@ -16,7 +17,7 @@
         <i class="requiredField">* Indicates a required field</i>
 
         <div class="editor-label">
-           * @Html.LabelFor(model => model.Name)
+            * @Html.LabelFor(model => model.Name)
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.Name)
@@ -24,7 +25,7 @@
         </div>
 
         <div class="editor-label">
-           * @Html.LabelFor(model => model.Street)
+            * @Html.LabelFor(model => model.Street)
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.Street)
@@ -32,38 +33,44 @@
         </div>
 
         <div class="editor-label">
-           * @Html.LabelFor(model => model.Town)
+            * @Html.LabelFor(model => model.Town)
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.Town)
             @Html.ValidationMessageFor(model => model.Town)
         </div>
-       
-         <div class="editor-label">
-           * @Html.LabelFor(model => model.County)
+
+        <div class="editor-label">
+            * @Html.LabelFor(model => model.County)
         </div>
         <div class="editor-field">
-             @{
+            @{
                 List<String> counties = new List<String>() {"", "Antrim", "Armagh", "Carlow", "Cavan", "Clare", "Cork", "Derry", 
                     "Donegal", "Down", "Dublin", "Fermanagh", "Galway", "Kerry", "Kildare", "Kilkenny", "Laois", "Leitrim", 
                     "Limerick", "Longford", "Louth", "Mayo", "Meath", "Monaghan", "Offaly", "Roscommon", "Sligo", "Tipperary", 
                     "Tyrone", "Waterford", "Westmeath", "Wexford", "Wicklow" };
-             }
+            }
 
             @Html.DropDownListFor(model => model.County, new SelectList(counties))
             @Html.ValidationMessageFor(model => model.County)
         </div>
 
         <div class="editor-label">
-           * @Html.LabelFor(model => model.Category)
+            * @Html.LabelFor(model => model.Category)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Category)
+            @{
+                List<String> categories = new List<String>() { "Automotive", "Business Support & Supplies", "Computers & Electronics", "Construction & Contractors",
+                "Distribution", "Education", "Emergency Services","Entertainment", "Food & Dining", "Health & Medicine", "Home & Garden", "Legal & Financial", "Manufacturing",
+                "Miscellaneous", "Personal Care & Services", "Real Estate", "Retail", "Travel & Transportation"};
+            }
+
+            @Html.DropDownListFor(model => model.Category, new SelectList(categories))
             @Html.ValidationMessageFor(model => model.Category)
         </div>
 
         <div class="editor-label">
-           * @Html.LabelFor(model => model.Description)
+            * @Html.LabelFor(model => model.Description)
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.Description)
@@ -71,9 +78,9 @@
         </div>
 
         <br>
-        @Html.Recaptcha(theme:Recaptcha.Web.RecaptchaTheme.Blackglass)
+        @Html.Recaptcha(theme: Recaptcha.Web.RecaptchaTheme.Blackglass)
         <br>
-        
+
         <p>
             <input type="submit" value="Create" />
         </p>

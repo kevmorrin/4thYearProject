@@ -144,7 +144,7 @@ namespace BusinessReviewApp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Business business)
+        public ActionResult Edit(Business business, HttpPostedFileBase file)
         {
             if (ModelState.IsValid)
             {
@@ -154,6 +154,18 @@ namespace BusinessReviewApp.Controllers
                 business.CombinedReviewRating = calculateRating(business);
                 //Update the BLOBs
                 //UpdateBLOBs(business);
+
+                if (file != null && file.ContentLength > 0)
+                    try
+                    {
+                        CloudBlockBlob blockBlob = container.GetBlockBlobReference(business.Name + business.Street + business.County + "Photo1.jpg");
+                        blockBlob.UploadFromStream(file.InputStream);
+                        business.URLPhoto1 = "http://lookitup.blob.core.windows.net/photos/" + business.Name + business.Street + business.County + "Photo1.jpg";
+                    }
+                    catch (Exception ex)
+                    {
+                        ViewBag.Message = "ERROR:" + ex.Message.ToString();
+                    }
 
                 db.Entry(business).State = EntityState.Modified;
                 db.SaveChanges();
@@ -310,7 +322,7 @@ namespace BusinessReviewApp.Controllers
                 {
                     blockBlob.UploadFromStream(fileStream);
                     business.URLPhoto1 = "http://lookitup.blob.core.windows.net/photos/" + business.Name + business.Street + business.County + "Photo1.jpg";
-                   }
+                 }
             }
             else
             {

@@ -6,7 +6,8 @@
 
 <h2>Edit</h2>
 
-@using (Html.BeginForm()) {
+@using (Html.BeginForm("Edit", "Business", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
@@ -83,8 +84,7 @@
             @Html.LabelFor(model => model.URLPhoto1)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.URLPhoto1)
-            @Html.ValidationMessageFor(model => model.URLPhoto1)
+             <input type="file" name="file" id="file" />
         </div>
 
         <div class="editor-label">

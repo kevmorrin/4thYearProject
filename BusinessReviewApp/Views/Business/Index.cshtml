@@ -15,7 +15,7 @@
     <div class="business-item">
       
         <div class="business-image">
-            <img src="@Html.DisplayFor(model => item.URLPhoto1)" alt="Images/imageNotFound.jpg" height="200" width="200">
+            <img src="@Html.DisplayFor(model => item.URLPhoto1)" alt="No image found" onError="this.src='Images/noPhotoAvailable.png';" height="200" width="200">
         </div>
         <div class="business-description-brief">
             <a href ="Business/Details/@Html.DisplayFor(modelItem => item.BusinessID)"><b>@Html.DisplayFor(modelItem => item.Name)</b></a><br>
