@@ -324,9 +324,9 @@ namespace BusinessReviewApp.Controllers
             {
                 try
                 {
-                    CloudBlockBlob blockBlob = container.GetBlockBlobReference(business.Name + business.Street + business.County + "Photo4.jpg");
-                    blockBlob.UploadFromStream(files[3].InputStream);
-                    business.URLPhoto5 = "http://lookitup.blob.core.windows.net/photos/" + business.Name + business.Street + business.County + "Photo4.jpg";
+                    CloudBlockBlob blockBlob = container.GetBlockBlobReference(business.Name + business.Street + business.County + "Photo5.jpg");
+                    blockBlob.UploadFromStream(files[4].InputStream);
+                    business.URLPhoto5 = "http://lookitup.blob.core.windows.net/photos/" + business.Name + business.Street + business.County + "Photo5.jpg";
                 }
                 catch (Exception ex)
                 {

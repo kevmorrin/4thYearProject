@@ -1,8 +1,7 @@
 ﻿@model BusinessReviewApp.Controllers.BusinessReviewViewModel
 
 <!--Google Maps Script-->
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCc592ZSWPerWJ2yQSLj-t9qFG3L5SDNJo&sensor=true" type="text/javascript">
-</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCc592ZSWPerWJ2yQSLj-t9qFG3L5SDNJo&sensor=true" type="text/javascript"></script>
 <script>
     var geocoder;
     var map;
@@ -60,8 +59,37 @@
 <div class="row">
     <div class="col-md-7 text-justify">
         <!-- Left Hand Side Of The Page 7/12 In Size -->
-        <div class="business-image">
-            <img src="@Html.DisplayFor(model => model.businesses.URLPhoto1)" height="300" width="300"  alt="No image found" onError="this.src='Images/noPhotoAvailable.png';">
+        <div class="image-gallery">
+            <div class="big-image">
+                <img id="img1" src="@Html.DisplayFor(model => model.businesses.URLPhoto1)"  onError="this.onerror=null;this.src='/Images/noPhotoAvailable.png';"/>
+                <img id="img2" src="@Html.DisplayFor(model => model.businesses.URLPhoto2)" onError="this.onerror=null;this.src='/Images/noPhotoAvailable.png';"/>
+                <img id="img3" src="@Html.DisplayFor(model => model.businesses.URLPhoto3)" onError="this.onerror=null;this.src='/Images/noPhotoAvailable.png';"/>
+                <img id="img4" src="@Html.DisplayFor(model => model.businesses.URLPhoto4)" onError="this.onerror=null;this.src='/Images/noPhotoAvailable.png';"/>
+                <img id="img5" src="@Html.DisplayFor(model => model.businesses.URLPhoto5)" onError="this.onerror=null;this.src='/Images/noPhotoAvailable.png';"/>
+                <img id="default" src="@Html.DisplayFor(model => model.businesses.URLPhoto1)" onError="this.onerror=null;this.src='/Images/noPhotoAvailable.png';"/>
+
+            </div>
+            <ul>
+                <li>
+                    <a href="#img1">
+                        <img class="smallImg" src="@Html.DisplayFor(model => model.businesses.URLPhoto1)" alt="No image found" onError="this.onerror=null;this.src='/Images/noPhotoAvailable.png';"/></a></li>
+                <li>
+                    <a href="#img2">
+                        <img class="smallImg" src="@Html.DisplayFor(model => model.businesses.URLPhoto2)" alt="No image found" onError="this.onerror=null;this.src='/Images/noPhotoAvailable.png';"/></a>
+                </li>
+                <li>
+                    <a href="#img3">
+                        <img class="smallImg"  src="@Html.DisplayFor(model => model.businesses.URLPhoto3)" alt="No image found" onError="this.onerror=null;this.src='/Images/noPhotoAvailable.png';"/></a>
+                </li>
+                <li>
+                    <a href="#img4">
+                        <img class="smallImg"  src="@Html.DisplayFor(model => model.businesses.URLPhoto4)" alt="No image found" onError="this.onerror=null;this.src='/Images/noPhotoAvailable.png';"/></a>
+                </li>
+                <li>
+                    <a href="#img5">
+                        <img class="smallImg"  src="@Html.DisplayFor(model => model.businesses.URLPhoto5)" alt="No image found" onError="this.onerror=null;this.src='/Images/noPhotoAvailable.png';"/></a>
+                </li>
+            </ul>
         </div>
 
         <!--Business Description-->
@@ -106,67 +134,67 @@
 
     </div>
 
-    <div class="col-md-5 text-justify">
-        <!-- Left Hand Side Of The Page 5/12 In Size -->
-        <h3>Category</h3>
-        <div>
-            @Html.DisplayFor(model => model.businesses.Category)
-        </div>
-
-        <!--Contact Details-->
-        @{
-            <h3>Contact Details</h3>
-            <div>
-                @Html.Label("Address")
-            </div>
-            //Check if there is an address number
-            if (!Html.DisplayFor(model => model.businesses.Number).ToString().IsEmpty())
-            {
-            @Html.DisplayFor(model => model.businesses.Number)<br>
-            }
-            @Html.DisplayFor(model => model.businesses.Street)<br>
-            @Html.DisplayFor(model => model.businesses.Town)<br>
-            @Html.DisplayFor(model => model.businesses.County)<br>
-            if (!Html.DisplayFor(model => model.businesses.Postcode).ToString().IsEmpty())
-            {
-            @Html.DisplayFor(model => model.businesses.Postcode)<br>
-            }
-
-            //Check if there is a phone number and display it if there is.
-            if (!Html.DisplayFor(model => model.businesses.PhoneNumber).ToString().IsEmpty())
-            {
-            <div>
-                @Html.LabelFor(model => model.businesses.PhoneNumber)
-            </div>
-            <div>
-                @Html.DisplayFor(model => model.businesses.PhoneNumber)
-            </div>
-            <br>
-            }
-
-            //Check if there is a email and display it if there is.
-            if (!Html.DisplayFor(model => model.businesses.Email).ToString().IsEmpty())
-            {
-            <div>
-                @Html.LabelFor(model => model.businesses.Email)
-            </div>
-            <div>
-                @Html.DisplayFor(model => model.businesses.Email)
-            </div>
-            <br>
-            }
-            //Check if there is a website URL and display it if there is.
-            if (!Html.DisplayFor(model => model.businesses.WebsiteURL).ToString().IsEmpty())
-            {
-            <div>
-                @Html.LabelFor(model => model.businesses.WebsiteURL)
-            </div>
-            <div>
-                <a href="@Html.DisplayFor(model => model.businesses.WebsiteURL)" target="_blank">@Html.DisplayFor(model => model.businesses.WebsiteURL)</a>
-            </div>
-            }
-        }
+<div class="col-md-5 text-justify">
+    <!-- Left Hand Side Of The Page 5/12 In Size -->
+    <h3>Category</h3>
+    <div>
+        @Html.DisplayFor(model => model.businesses.Category)
     </div>
+
+    <!--Contact Details-->
+    @{
+        <h3>Contact Details</h3>
+        <div>
+            @Html.Label("Address")
+        </div>
+        //Check if there is an address number
+        if (!Html.DisplayFor(model => model.businesses.Number).ToString().IsEmpty())
+        {
+        @Html.DisplayFor(model => model.businesses.Number)<br>
+        }
+        @Html.DisplayFor(model => model.businesses.Street)<br>
+        @Html.DisplayFor(model => model.businesses.Town)<br>
+        @Html.DisplayFor(model => model.businesses.County)<br>
+        if (!Html.DisplayFor(model => model.businesses.Postcode).ToString().IsEmpty())
+        {
+        @Html.DisplayFor(model => model.businesses.Postcode)<br>
+        }
+
+        //Check if there is a phone number and display it if there is.
+        if (!Html.DisplayFor(model => model.businesses.PhoneNumber).ToString().IsEmpty())
+        {
+        <div>
+            @Html.LabelFor(model => model.businesses.PhoneNumber)
+        </div>
+        <div>
+            @Html.DisplayFor(model => model.businesses.PhoneNumber)
+        </div>
+        <br>
+        }
+
+        //Check if there is a email and display it if there is.
+        if (!Html.DisplayFor(model => model.businesses.Email).ToString().IsEmpty())
+        {
+        <div>
+            @Html.LabelFor(model => model.businesses.Email)
+        </div>
+        <div>
+            @Html.DisplayFor(model => model.businesses.Email)
+        </div>
+        <br>
+        }
+        //Check if there is a website URL and display it if there is.
+        if (!Html.DisplayFor(model => model.businesses.WebsiteURL).ToString().IsEmpty())
+        {
+        <div>
+            @Html.LabelFor(model => model.businesses.WebsiteURL)
+        </div>
+        <div>
+            <a href="@Html.DisplayFor(model => model.businesses.WebsiteURL)" target="_blank">@Html.DisplayFor(model => model.businesses.WebsiteURL)</a>
+        </div>
+        }
+    }
+</div>
 </div>
 <hr>
 <div class="col-md-12 text-justify">
@@ -185,7 +213,8 @@
         foreach (var review in Model.reviews)
         {
         <b>@review.UserProfile.UserName.ToString().ToUpper()</b>
-        <p>Rating:
+        <p>
+            Rating:
             <img src="/Images/@review.Rating.ToString()StarRating.png" height="30" width="120"><br>
         </p>
         @review.Description.ToString()<br>
