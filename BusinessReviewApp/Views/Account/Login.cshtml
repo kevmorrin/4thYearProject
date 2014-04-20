@@ -1,15 +1,7 @@
 ﻿@model BusinessReviewApp.Models.LoginModel
 
-@{
-    ViewBag.Title = "Log in";
-}
-
-<hgroup class="title">
-    <h1>@ViewBag.Title.</h1>
-</hgroup>
-
 <section id="loginForm">
-    <h2>Use a local account to log in.</h2>
+    <h2>Log In</h2>
     @using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl })) {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
@@ -31,8 +23,8 @@
     </div>
        
      <div> 
-        @Html.LabelFor(m => m.RememberMe, new { @class = "checkbox" })
-        @Html.CheckBoxFor(m => m.RememberMe) 
+        <b>Remember Me:</b>
+        @Html.CheckBoxFor(m => m.RememberMe)
      </div>
     <input type="submit" value="Log in" />
     <p>

@@ -57,7 +57,7 @@
 <hr>
 
 <div class="row">
-    <div class="col-md-7 text-justify">
+    <div class="col-md-6 text-justify">
         <!-- Left Hand Side Of The Page 7/12 In Size -->
         <div class="image-gallery">
             <div class="big-image">
@@ -122,79 +122,79 @@
         </div>
         @{
             //Check if the category is a restaurant and then if it is fast food.
-            if (Html.DisplayFor(model => model.businesses.Category).ToString().Equals("Restaurant") && !Html.DisplayFor(model => model.businesses.FastFood).ToString().IsEmpty())
+            if (Model.businesses.Category.ToString().Equals("Food & Dining") && !Model.businesses.FastFood.IsEmpty())
             {
-            <div>
-                <h3>Fast Food</h3>
-                @Html.DisplayFor(model => model.businesses.FastFood)
-            </div>
+                <div>
+                    <h3>Fast Food</h3>
+                    @Html.DisplayFor(model => model.businesses.FastFood)
+                </div>
             }
         }
 
 
     </div>
 
-<div class="col-md-5 text-justify">
-    <!-- Left Hand Side Of The Page 5/12 In Size -->
-    <h3>Category</h3>
-    <div>
-        @Html.DisplayFor(model => model.businesses.Category)
+    <div class="col-md-6 text-justify">
+        <!-- Left Hand Side Of The Page 5/12 In Size -->
+        <h3>Category</h3>
+        <div>
+            @Html.DisplayFor(model => model.businesses.Category)
+        </div>
+
+        <!--Contact Details-->
+        @{
+            <h3>Contact Details</h3>
+            <div>
+                @Html.Label("Address")
+            </div>
+            //Check if there is an address number
+            if (!Model.businesses.Number.ToString().IsEmpty())
+            {
+                @Html.DisplayFor(model => model.businesses.Number)<br>
+            }
+                @Html.DisplayFor(model => model.businesses.Street)<br>
+                @Html.DisplayFor(model => model.businesses.Town)<br>
+                @Html.DisplayFor(model => model.businesses.County)<br>
+            if (!Model.businesses.Postcode.IsEmpty())
+            {
+                @Html.DisplayFor(model => model.businesses.Postcode)<br>
+            }
+
+            //Check if there is a phone number and display it if there is.
+            if (!Model.businesses.PhoneNumber.IsEmpty())
+            {
+                <div>
+                    @Html.LabelFor(model => model.businesses.PhoneNumber)
+                </div>
+                <div>
+                    @Html.DisplayFor(model => model.businesses.PhoneNumber)
+                </div>
+                <br>
+            }
+
+            //Check if there is a email and display it if there is.
+            if (!Model.businesses.Email.IsEmpty())
+            {
+                <div>
+                    @Html.LabelFor(model => model.businesses.Email)
+                </div>
+                <div>
+                    @Html.DisplayFor(model => model.businesses.Email)
+                </div>
+                <br>
+            }
+            //Check if there is a website URL and display it if there is.
+            if (!Model.businesses.WebsiteURL.IsEmpty())
+            {
+                <div>
+                    @Html.LabelFor(model => model.businesses.WebsiteURL)
+                </div>
+                <div>
+                    <a href="@Html.DisplayFor(model => model.businesses.WebsiteURL)" target="_blank">@Html.DisplayFor(model => model.businesses.WebsiteURL)</a>
+                </div>
+            }
+        }
     </div>
-
-    <!--Contact Details-->
-    @{
-        <h3>Contact Details</h3>
-        <div>
-            @Html.Label("Address")
-        </div>
-        //Check if there is an address number
-        if (!Html.DisplayFor(model => model.businesses.Number).ToString().IsEmpty())
-        {
-        @Html.DisplayFor(model => model.businesses.Number)<br>
-        }
-        @Html.DisplayFor(model => model.businesses.Street)<br>
-        @Html.DisplayFor(model => model.businesses.Town)<br>
-        @Html.DisplayFor(model => model.businesses.County)<br>
-        if (!Html.DisplayFor(model => model.businesses.Postcode).ToString().IsEmpty())
-        {
-        @Html.DisplayFor(model => model.businesses.Postcode)<br>
-        }
-
-        //Check if there is a phone number and display it if there is.
-        if (!Html.DisplayFor(model => model.businesses.PhoneNumber).ToString().IsEmpty())
-        {
-        <div>
-            @Html.LabelFor(model => model.businesses.PhoneNumber)
-        </div>
-        <div>
-            @Html.DisplayFor(model => model.businesses.PhoneNumber)
-        </div>
-        <br>
-        }
-
-        //Check if there is a email and display it if there is.
-        if (!Html.DisplayFor(model => model.businesses.Email).ToString().IsEmpty())
-        {
-        <div>
-            @Html.LabelFor(model => model.businesses.Email)
-        </div>
-        <div>
-            @Html.DisplayFor(model => model.businesses.Email)
-        </div>
-        <br>
-        }
-        //Check if there is a website URL and display it if there is.
-        if (!Html.DisplayFor(model => model.businesses.WebsiteURL).ToString().IsEmpty())
-        {
-        <div>
-            @Html.LabelFor(model => model.businesses.WebsiteURL)
-        </div>
-        <div>
-            <a href="@Html.DisplayFor(model => model.businesses.WebsiteURL)" target="_blank">@Html.DisplayFor(model => model.businesses.WebsiteURL)</a>
-        </div>
-        }
-    }
-</div>
 </div>
 <hr>
 <div class="col-md-12 text-justify">
@@ -212,13 +212,13 @@
     @{
         foreach (var review in Model.reviews)
         {
-        <b>@review.UserProfile.UserName.ToString().ToUpper()</b>
-        <p>
-            Rating:
-            <img src="/Images/@review.Rating.ToString()StarRating.png" height="30" width="120"><br>
-        </p>
-        @review.Description.ToString()<br>
-        <hr>
+            <b>@review.UserProfile.UserName.ToString().ToUpper()</b>
+            <p>
+                Rating:
+                <img src="/Images/@review.Rating.ToString()StarRating.png" height="30" width="120"><br>
+            </p>
+            @review.Description.ToString()<br>
+            <hr>
         }  
     }
 </div>

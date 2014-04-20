@@ -11,7 +11,7 @@ footer{
 html { 
     background-image:url('/Images/background.jpg');
     margin: 10em;
-    margin-top: 8em;
+    margin-top: 9em;
 }
 
 body { 
@@ -71,6 +71,9 @@ header {
     font-size: medium;
 }
 
+#login{
+    color: #C9B069;
+}
 /*Create Page*/
 .requiredField {
     font-size: 1em;
