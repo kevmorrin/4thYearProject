@@ -10,7 +10,7 @@ footer{
 
 html { 
     background-image:url('/Images/background.jpg');
-        margin: 20em;
+    margin: 10em;
     margin-top: 8em;
 }
 
@@ -29,6 +29,12 @@ body {
     color: #F7A116;
 }
 
+.navbar-default {
+    background-image: url('/Images/navbarBackground.jpg');
+    background-color: none;
+    box-shadow: 2px 2px 1px #eeecec;
+}
+
 .navbar-default .navbar-nav>li>a {
     color: #C9B069;
 }
@@ -41,7 +47,7 @@ body {
     text-decoration: underline;
     /*Override to remove css in bootstrap*/
     background-image: none;
-    background-color: white;
+    background-color: transparent;
     box-shadow: none;
 }
 
@@ -88,8 +94,7 @@ header {
   height:90px;
 }
 
-
-
+/*Image Gallery*/
 .image-gallery{
   width:480px;
   height:470px;

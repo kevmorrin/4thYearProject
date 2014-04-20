@@ -45,7 +45,7 @@
         @Html.DisplayFor(model => model.businesses.Town),
         @Html.DisplayFor(model => model.businesses.County)
     </b>
-    <p>Average Review Rating:<img src="/Images/@Html.DisplayFor(model => model.businesses.CombinedReviewRating)StarRating.png" height="30" width="120"></p>
+    <p>Average Review:<img src="/Images/@Html.DisplayFor(model => model.businesses.CombinedReviewRating)StarRating.png" height="30" width="120"></p>
     <br>
     <p>
         @Html.ActionLink("Add/Edit businesses details", "Edit", new { id = Model.businesses.BusinessID })<br>

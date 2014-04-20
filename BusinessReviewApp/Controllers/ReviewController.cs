@@ -109,8 +109,33 @@ namespace BusinessReviewApp.Controllers
 
                     //Update Rating for business
                     calculateRating(review);
-                    
-                    return RedirectToAction("Index");
+
+
+
+
+                    BusinessReviewViewModel businessReviewVM = new BusinessReviewViewModel();
+                    businessReviewVM.businesses = db.Businesses.Find(review.BusinessID);
+                    if (businessReviewVM.businesses == null)
+                    {
+                        return HttpNotFound();
+                    }
+
+                    businessReviewVM.reviews = new List<Review>();
+                    foreach (var item in db.Reviews.ToList())
+                    {
+                        if (item.BusinessID == db.Businesses.Find(review.BusinessID).BusinessID)
+                        {
+                            businessReviewVM.reviews.Add(item);
+                        }
+                    }
+                    return View(businessReviewVM);
+
+
+
+
+
+
+                    //return RedirectToAction("Index");
                 }
                
             }

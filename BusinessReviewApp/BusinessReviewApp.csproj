@@ -301,6 +301,7 @@
     <Content Include="Images\heroAccent.png" />
     <Content Include="Images\imageNotFound.jpg" />
     <Content Include="Images\lookItUpLogo.png" />
+    <Content Include="Images\navbarBackground.jpg" />
     <Content Include="Images\noPhotoAvailable.png" />
     <Content Include="Images\orderedList0.png" />
     <Content Include="Images\orderedList1.png" />
