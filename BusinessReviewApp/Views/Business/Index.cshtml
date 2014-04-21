@@ -1,40 +1,59 @@
 ﻿@model IEnumerable<BusinessReviewApp.Models.Business>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Search businesses using the filters below.";
 }
 
-<h2>Index</h2>
+<h3>@ViewBag.Title</h3>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @using (Html.BeginForm("Index", "Business", FormMethod.Get))
+    {
+        <p>
+            Category: @Html.DropDownList("category", "All")
+            Business Name: @Html.TextBox("SearchString")
+            <input type="submit" value="Filter" />
+        </p>
+    }
 </p>
- 
-@foreach (var item in Model) 
-{
-    <div class="business-item">
-      
-        <div class="business-image">
-            <img src="@Html.DisplayFor(model => item.URLPhoto1)" alt="No image found" onError="this.src='Images/noPhotoAvailable.png';" height="200" width="200">
+@{
+    bool anyBusinesses = false;
+    foreach (var item in Model)
+    {
+        anyBusinesses = true;
+        <div class="business-item">
+
+            <div class="business-image">
+                <img src="@Html.DisplayFor(model => item.URLPhoto1)" alt="No image found" onError="this.src='Images/noPhotoAvailable.png';" height="200" width="200">
+            </div>
+            <div class="business-description-brief">
+                <a href ="Business/Details/@Html.DisplayFor(modelItem => item.BusinessID)"><b>@Html.DisplayFor(modelItem => item.Name)</b></a><br>
+                <b>@Html.DisplayFor(modelItem => item.Street), @Html.DisplayFor(modelItem => item.Town)</b><br>
+                <!--Check if description is greater than 200 characters and truncate it if it is-->
+                @if (item.Description.ToString().Length < 200)
+                {
+                    @Html.DisplayFor(modelItem => item.Description).ToString()<br>
+                }
+                else
+                {
+                    @Html.DisplayFor(modelItem => item.Description).ToString().Substring(0, 200)
+                    @Html.ActionLink("..More", "Details", new { id = item.BusinessID })<br>
+                }
+
+
+                Rating:
+                <img src="Images/@Html.DisplayFor(modelItem => item.CombinedReviewRating)StarRating.png" height="30" width="120">
+                @Html.ActionLink("Delete", "Delete", new { id = item.BusinessID })
+            </div>
         </div>
-        <div class="business-description-brief">
-            <a href ="Business/Details/@Html.DisplayFor(modelItem => item.BusinessID)"><b>@Html.DisplayFor(modelItem => item.Name)</b></a><br>
-            <b>@Html.DisplayFor(modelItem => item.Street), @Html.DisplayFor(modelItem => item.Town)</b><br>
-            <!--Check if description is greater than 200 characters and truncate it if it is-->
-            @if(item.Description.ToString().Length < 200)
-            {
-                @Html.DisplayFor(modelItem => item.Description).ToString()<br>
-            }
-            else
-            {
-                @Html.DisplayFor(modelItem => item.Description).ToString().Substring(0,200)
-                @Html.ActionLink("..More", "Details", new { id=item.BusinessID })<br>
-            }
-            
-            
-            Rating: <img src="Images/@Html.DisplayFor(modelItem => item.CombinedReviewRating)StarRating.png" height="30" width="120">
-            @Html.ActionLink("Delete", "Delete", new { id=item.BusinessID })
-        </div>
-    </div>
+    }
+    
+    if(anyBusinesses == false)
+    {
+        <p> 
+            There doesn't seem to be any businesses matching your search requirements...why not add the business details yourself @Html.ActionLink("here", "Create").
+        </p>
+    }
 }
+
 

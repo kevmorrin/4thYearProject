@@ -45,9 +45,31 @@ namespace BusinessReviewApp.Controllers
         //
         // GET: /Business/
 
-        public ActionResult Index()
+        public ActionResult Index(string category, string searchString)
         {
-            return View(db.Businesses.ToList());
+            var categoryList = new List<string>();
+
+            var categoryQry = from d in db.Businesses
+                           orderby d.Category
+                           select d.Category;
+
+            categoryList.AddRange(categoryQry.Distinct());
+            ViewBag.category = new SelectList(categoryList);
+
+            var businesses = from b in db.Businesses
+                         select b;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                businesses = businesses.Where(s => s.Name.Contains(searchString));
+            }
+
+            if (!string.IsNullOrEmpty(category))
+            {
+                businesses = businesses.Where(x => x.Category == category);
+            }
+
+            return View(businesses);
         }
 
         //

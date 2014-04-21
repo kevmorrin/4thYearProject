@@ -2,10 +2,10 @@
 @model BusinessReviewApp.Models.Business
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Add a new business below.";
 }
 
-<h2>Create</h2>
+<h3>@ViewBag.Title</h3>
 
 @using (Html.BeginForm())
 {
@@ -83,6 +83,7 @@
 
         <p>
             <input type="submit" value="Create" />
+            <i>Note: After the basic details of a business have been added you can then add more details by editing that </i>
         </p>
     </fieldset>
 }
