@@ -29,10 +29,10 @@ namespace BusinessReviewApp.Controllers
     public class BusinessController : Controller
     {
         //BLOB Storage Variables
-        //Retrieve storage account from connection string.
-        //CloudStorageAccount storageAccount = CloudStorageAccount.Parse(CloudConfigurationManager.GetSetting("StorageConnectionString"));
         //If storage connecion string is equal to null use this
         static CloudStorageAccount storageAccount = CloudStorageAccount.Parse("DefaultEndpointsProtocol=https;AccountName=lookitup;AccountKey=ysY8da07rhRIlj4FMYU9vc7kedNm5DClWw6eKPUw863Qxw46alF8hqxRZEfIBoFDUFxp/1w/4bhXmnuyA+6CZw==");
+        //Alternatively Retrieve storage account from connection string.
+        //CloudStorageAccount storageAccount = CloudStorageAccount.Parse(CloudConfigurationManager.GetSetting("StorageConnectionString"));
 
         // Create the blob client.
         static CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
@@ -45,23 +45,40 @@ namespace BusinessReviewApp.Controllers
         //
         // GET: /Business/
 
-        public ActionResult Index(string category, string searchString)
+        public ActionResult Index(string category, string county, string searchString)
         {
+            //Get all the counties in a list for use with the filter
+            var countyList = new List<string>();
+
+            var countyQry = from b in db.Businesses
+                              orderby b.County
+                            select b.County;
+
+            countyList.AddRange(countyQry.Distinct());
+            ViewBag.county = new SelectList(countyList);
+
+            //Get all the categories in a list for use with the filter
             var categoryList = new List<string>();
 
-            var categoryQry = from d in db.Businesses
-                           orderby d.Category
-                           select d.Category;
+            var categoryQry = from b in db.Businesses
+                           orderby b.Category
+                           select b.Category;
 
             categoryList.AddRange(categoryQry.Distinct());
             ViewBag.category = new SelectList(categoryList);
 
+            //Get the businesses from the DB
             var businesses = from b in db.Businesses
                          select b;
 
             if (!String.IsNullOrEmpty(searchString))
             {
                 businesses = businesses.Where(s => s.Name.Contains(searchString));
+            }
+
+            if (!String.IsNullOrEmpty(county))
+            {
+                businesses = businesses.Where(s => s.County.Contains(county));
             }
 
             if (!string.IsNullOrEmpty(category))
@@ -139,6 +156,7 @@ namespace BusinessReviewApp.Controllers
                     db.Businesses.Add(business);
 
                     db.SaveChanges();
+                    
                     return RedirectToAction("Index");
                 }
                 else

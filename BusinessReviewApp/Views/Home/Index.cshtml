@@ -1,25 +1,67 @@
-﻿@{
+﻿@model IEnumerable<BusinessReviewApp.Models.Business>
+
+@{
     ViewBag.Title = "Home";
 }
 
 <hgroup class="title">
-    <h2>@ViewBag.Title</h2>
+    <h2>Need to find a business? Why not LookItUp?</h2>
 </hgroup>
+<hr>
+
 <div class="row">
-    <div class="col-md-7 text-justify">  <!-- Left Hand Side Of The Page 7/12 In Size -->
+    <div class="col-md-7 text-justify">
+        <!-- Left Hand Side Of The Page 7/12 In Size -->
+        <h3>Search</h3>
         <p>
-            Welcome to LookItUp, the online application that allows users to search for Irish businesses and share their veiws and opinions. 
-            LookItUp is crowdsourced, which means the LookItUp community can keep business details up to date.
-            This means information can easily be updated as changes happen, resulting in a quick and convienaint way for people to share details about their favourite businesses.
+            To @Html.ActionLink("search", "Index", "Business") for business details just click the search tab and enter the business details you want. 
         </p>
+        <h3>Create</h3>
+        <p>
+            @Html.ActionLink("Add a new business", "Create", "Business"), this allows people to get information and makes the application more helpful for users.
+            People can also review these businesses to provide useful feedback.
+        </p>
+        <h3>Sign Up or Log in</h3>
+        <p>
+            By signing up for <b>free</b> or logging in, you can add, update or review businesses.<br />
+            @Html.ActionLink("Sign up", "Register", "Account").<br />
+            @Html.ActionLink("Log In", "LogIn", "Account").
+        </p>
+
     </div>
-      
-    <div class="col-md-5 text-justify">  <!-- Left Hand Side Of The Page 5/12 In Size -->
-          <h3>Newly Added Businesses</h3>
-            <p>
-                This sections will feature some of the newly added businesses to encourage users to add more details about them.
-            </p>
+
+    <div class="col-md-5 text-justify">
+        <!-- Left Hand Side Of The Page 5/12 In Size -->
+        <h3>Recently Updated Businesses</h3>
+        <p>
+            Why not add some business details yourself or review a business to help give other users some feedback.
+        </p>
+        @foreach (var item in Model.OrderByDescending(b => b.DateTime).Take(3))
+        {
+            <div class="business-item">
+
+                <div class="business-image">
+                    <img src="@Html.DisplayFor(model => item.URLPhoto1)" alt="No image found" onError="this.src='Images/noPhotoAvailable.png';" height="120" width="120">
+                </div>
+                <div class="business-description-brief">
+                    <a href ="Business/Details/@Html.DisplayFor(modelItem => item.BusinessID)"><b>@Html.DisplayFor(modelItem => item.Name)</b></a><br />
+                    <b>@Html.DisplayFor(modelItem => item.Street), @Html.DisplayFor(modelItem => item.Town), @Html.DisplayFor(modelItem => item.County)</b><br />
+                    <!--Check if description is greater than 100 characters and truncate it if it is-->
+                    @if (item.Description.ToString().Length < 100)
+                    {
+                        @Html.DisplayFor(modelItem => item.Description).ToString()<br />
+                    }
+                    else
+                    {
+                        @Html.DisplayFor(modelItem => item.Description).ToString().Substring(0, 100)
+                        @Html.ActionLink("..More", "Details", new { id = item.BusinessID })<br />
+                    }
+
+
+                    Rating:<img src="Images/@Html.DisplayFor(modelItem => item.CombinedReviewRating)StarRating.png" height="30" width="120">
+                </div>
+            </div>
+        }
     </div>
 </div>
-
 

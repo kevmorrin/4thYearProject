@@ -35,6 +35,7 @@ namespace BusinessReviewApp.Models
         [Required]
         public string Category { get; set; }
         [Required]
+        [DataType(DataType.MultilineText)]
         public string Description { get; set; }
         [Required]
         public DateTime DateTime { get; set; }

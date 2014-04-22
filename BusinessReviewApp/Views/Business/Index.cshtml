@@ -1,59 +1,60 @@
 ﻿@model IEnumerable<BusinessReviewApp.Models.Business>
 
 @{
-    ViewBag.Title = "Search businesses using the filters below.";
+    ViewBag.Title = "Search businesses";
 }
-
-<h3>@ViewBag.Title</h3>
-
+<h3>Search businesses using the filters below</h3>
 <p>
     @using (Html.BeginForm("Index", "Business", FormMethod.Get))
     {
         <p>
-            Category: @Html.DropDownList("category", "All")
-            Business Name: @Html.TextBox("SearchString")
+            <b>Category: </b>@Html.DropDownList("category", "All")
+            <b>County: </b>@Html.DropDownList("county", "All")
+            <b>Business Name: </b>@Html.TextBox("SearchString")
             <input type="submit" value="Filter" />
+            <br />
+            <i>The search displays the first 20 results, a more specific search may be required to find a specific business.</i>
         </p>
+         @Html.ActionLink("Add a business yourself", "Create")
     }
 </p>
 @{
     bool anyBusinesses = false;
-    foreach (var item in Model)
+        <!--Displays first 10 business that match the search query-->
+    foreach (var item in Model.Take(20))
     {
         anyBusinesses = true;
-        <div class="business-item">
+        
+    <div class="business-item">
 
-            <div class="business-image">
-                <img src="@Html.DisplayFor(model => item.URLPhoto1)" alt="No image found" onError="this.src='Images/noPhotoAvailable.png';" height="200" width="200">
-            </div>
-            <div class="business-description-brief">
-                <a href ="Business/Details/@Html.DisplayFor(modelItem => item.BusinessID)"><b>@Html.DisplayFor(modelItem => item.Name)</b></a><br>
-                <b>@Html.DisplayFor(modelItem => item.Street), @Html.DisplayFor(modelItem => item.Town)</b><br>
-                <!--Check if description is greater than 200 characters and truncate it if it is-->
-                @if (item.Description.ToString().Length < 200)
-                {
-                    @Html.DisplayFor(modelItem => item.Description).ToString()<br>
-                }
-                else
-                {
-                    @Html.DisplayFor(modelItem => item.Description).ToString().Substring(0, 200)
-                    @Html.ActionLink("..More", "Details", new { id = item.BusinessID })<br>
-                }
-
-
-                Rating:
-                <img src="Images/@Html.DisplayFor(modelItem => item.CombinedReviewRating)StarRating.png" height="30" width="120">
-                @Html.ActionLink("Delete", "Delete", new { id = item.BusinessID })
-            </div>
+        <div class="business-image">
+            <img src="@Html.DisplayFor(model => item.URLPhoto1)" alt="No image found" onError="this.src='Images/noPhotoAvailable.png';" height="200" width="200">
         </div>
+        <div class="business-description-brief">
+            <a href ="Business/Details/@Html.DisplayFor(modelItem => item.BusinessID)"><b>@Html.DisplayFor(modelItem => item.Name)</b></a><br />
+            <b>@Html.DisplayFor(modelItem => item.Street), @Html.DisplayFor(modelItem => item.Town), @Html.DisplayFor(modelItem => item.County)</b><br />
+            <!--Check if description is greater than 200 characters and truncate it if it is-->
+            @if (item.Description.ToString().Length < 200)
+            {
+                @Html.DisplayFor(modelItem => item.Description).ToString()<br />
+            }
+            else
+            {
+                @Html.DisplayFor(modelItem => item.Description).ToString().Substring(0, 200)
+                @Html.ActionLink("..More", "Details", new { id = item.BusinessID })<br />
+            }
+
+
+            Rating:<img src="Images/@Html.DisplayFor(modelItem => item.CombinedReviewRating)StarRating.png" height="30" width="120">
+        </div>
+    </div>
     }
-    
-    if(anyBusinesses == false)
+
+
+    if (anyBusinesses == false)
     {
-        <p> 
+        <p>
             There doesn't seem to be any businesses matching your search requirements...why not add the business details yourself @Html.ActionLink("here", "Create").
         </p>
-    }
+     }
 }
-
-
