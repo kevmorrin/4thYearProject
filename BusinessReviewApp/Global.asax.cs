@@ -25,9 +25,9 @@ namespace BusinessReviewApp
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AuthConfig.RegisterAuth();
             
-            //Database.SetInitializer<Models.UsersContext>(new CreateDatabaseIfNotExists<Models.UsersContext>());
+            Database.SetInitializer<Models.UsersContext>(new CreateDatabaseIfNotExists<Models.UsersContext>());
             //Locally drop DB if it changes
-            System.Data.Entity.Database.SetInitializer(new System.Data.Entity.DropCreateDatabaseIfModelChanges<Models.UsersContext>());
+            //System.Data.Entity.Database.SetInitializer(new System.Data.Entity.DropCreateDatabaseIfModelChanges<Models.UsersContext>());
         }
     }
 }

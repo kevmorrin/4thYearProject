@@ -51,6 +51,7 @@ namespace BusinessReviewApp.Models
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
         public string WebsiteURL { get; set; }
+        [Range(0,5)]
         public Nullable<int> PriceRating { get; set; }
         public string SuitableForFamilies { get; set; }
         public string FastFood { get; set; }

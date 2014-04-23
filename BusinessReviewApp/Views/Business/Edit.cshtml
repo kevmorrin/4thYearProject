@@ -146,15 +146,22 @@
                 @Html.ValidationMessageFor(model => model.SuitableForFamilies)
             </div>
 
-            <!--Fast Food-->
-            <div class="editor-label">
-                @Html.LabelFor(model => model.FastFood)
-            </div>
-            <div class="editor-field">
-                @Html.DropDownListFor(model => model.FastFood, new SelectList(yesOrNo))
-                @Html.ValidationMessageFor(model => model.FastFood)<br />
-                <br />
-            </div>
+             <!--Fast Food-->
+            @{
+                //Check if the category is a Food and Dining and then allow a user to enter if it is fast food.
+                if (Model.Category.ToString().Equals("Food & Dining"))
+                {
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.FastFood)
+                    </div>
+                    <div class="editor-field">
+                        @Html.DropDownListFor(model => model.FastFood, new SelectList(yesOrNo))
+                        @Html.ValidationMessageFor(model => model.FastFood)<br />
+                    </div>
+                }
+            }
+           
+            <br />
             <p>
                 <input type="submit" value="Save" />
             </p>
@@ -163,27 +170,27 @@
         <div class="col-md-6">
             <!--PHOTOS-->
             <h3>Choose photos you want to upload:</h3>
-            @Html.LabelFor(model => model.URLPhoto1)
+            <b>Photo 1</b>
             <input type="file" name="files" id="file1" />
             @Html.HiddenFor(model => model.URLPhoto1)
             <b>Current Photo:</b><i>@Html.ValueFor(model => model.URLPhoto1)</i><br /><br />
 
-            @Html.LabelFor(model => model.URLPhoto2)
+            <b>Photo 2</b>
             <input type="file" name="files" id="file2" />
             @Html.HiddenFor(model => model.URLPhoto2)
             <b>Current Photo:</b><i>@Html.ValueFor(model => model.URLPhoto2)</i><br /><br />
 
-            @Html.LabelFor(model => model.URLPhoto3)
+            <b>Photo 3</b>
             <input type="file" name="files" id="file3" />
             @Html.HiddenFor(model => model.URLPhoto3)
             <b>Current Photo:</b><i>@Html.ValueFor(model => model.URLPhoto3)</i><br /><br />
 
-            @Html.LabelFor(model => model.URLPhoto4)
+            <b>Photo 4</b>
             <input type="file" name="files" id="file4" />
             @Html.HiddenFor(model => model.URLPhoto4)
             <b>Current Photo:</b><i>@Html.ValueFor(model => model.URLPhoto4)</i><br /><br />
 
-            @Html.LabelFor(model => model.URLPhoto5)
+            <b>Photo 5</b>
             <input type="file" name="files" id="file5" />
             @Html.HiddenFor(model => model.URLPhoto5)
             <b>Current Photo:</b><i>@Html.ValueFor(model => model.URLPhoto5)</i><br /><br />

@@ -18,6 +18,9 @@ body {
     padding: 1em;
 }
 
+.validation-summary-errors{
+    color: red;
+}
 /*Nav-bar*/
 .nav>li>a {
     padding: 25px 35px;

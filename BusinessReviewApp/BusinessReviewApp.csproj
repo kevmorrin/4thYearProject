@@ -298,6 +298,12 @@
     <Content Include="Images\9StarRating.png" />
     <Content Include="Images\background.jpg" />
     <Content Include="Images\bullet.png" />
+    <Content Include="Images\0euroRating.png" />
+    <Content Include="Images\1euroRating.png" />
+    <Content Include="Images\2euroRating.png" />
+    <Content Include="Images\3euroRating.png" />
+    <Content Include="Images\4euroRating.png" />
+    <Content Include="Images\5euroRating.png" />
     <Content Include="Images\heroAccent.png" />
     <Content Include="Images\imageNotFound.jpg" />
     <Content Include="Images\lookItUpLogo.png" />

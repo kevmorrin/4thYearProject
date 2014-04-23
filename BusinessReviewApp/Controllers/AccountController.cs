@@ -147,7 +147,7 @@ namespace BusinessReviewApp.Controllers
 
         //
         // GET: /Account/Manage
-
+        
         public ActionResult Manage(ManageMessageId? message)
         {
             ViewBag.StatusMessage =
