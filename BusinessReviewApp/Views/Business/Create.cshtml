@@ -60,9 +60,9 @@
         </div>
         <div class="editor-field">
             @{
-                List<String> categories = new List<String>() { "Automotive", "Business Support & Supplies", "Computers & Electronics", "Construction & Contractors",
-                "Distribution", "Education", "Emergency Services","Entertainment", "Food & Dining", "Health & Medicine", "Home & Garden", "Legal & Financial", "Manufacturing",
-                "Miscellaneous", "Personal Care & Services", "Nightlife", "Real Estate", "Retail", "Travel & Transportation"};
+                List<String> categories = new List<String>() { "Automotive", "Business Support and Supplies", "Computers and Electronics", "Construction and Contractors",
+                "Distribution", "Education", "Emergency Services","Entertainment", "Food and Dining", "Health and Medicine", "Home and Garden", "Legal and Financial", "Manufacturing",
+                "Miscellaneous", "Personal Care and Services", "Nightlife", "Real Estate", "Retail", "Travel and Transportation"};
             }
 
             @Html.DropDownListFor(model => model.Category, new SelectList(categories))
@@ -87,10 +87,6 @@
         </p>
     </fieldset>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

@@ -15,12 +15,39 @@ html {
 
 body { 
 	background: White; 
+    font-size: 1.6em;
     padding: 1em;
+}
+.title h2{
+    color: #005D82;
+}
+
+h3{
+    color: #005D82;
+}
+
+h2{
+    color: #005D82;
 }
 
 .validation-summary-errors{
     color: red;
 }
+
+/*User Manual*/
+img.manualImage{
+    display: block;
+    margin-left: auto;
+    margin-right: auto
+}
+
+a.anchor{
+    display: block; 
+    position: relative; 
+    top: -100px; 
+    visibility: hidden;
+}
+
 /*Nav-bar*/
 .nav>li>a {
     padding: 25px 35px;
@@ -104,21 +131,15 @@ hr{
     height: 350px;
 }
 
+
+
+/*Image Gallery*/
 .smallImg
 {
   width:90px;
   height:90px;
 }
 
-.title h2{
-    color: #005D82;
-}
-
-h3{
-    color: #005D82;
-}
-
-/*Image Gallery*/
 .image-gallery{
   width:480px;
   height:470px;

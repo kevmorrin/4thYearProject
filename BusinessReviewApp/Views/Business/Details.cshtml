@@ -190,7 +190,7 @@
                 @Html.LabelFor(model => model.businesses.WebsiteURL)
             </div>
             <div>
-                <a href="@Html.DisplayFor(model => model.businesses.WebsiteURL)" target="_blank">@Html.DisplayFor(model => model.businesses.WebsiteURL)</a>
+                <a href="http://@Html.DisplayFor(model => model.businesses.WebsiteURL)" target="_blank">@Html.DisplayFor(model => model.businesses.WebsiteURL)</a>
             </div>
             }
         }
@@ -202,7 +202,7 @@
     <div id="map_canvas"></div>
     <p>
         <i>Note: The pins on the map are automatically generated based on the address specified. 
-         They may not always be completely accurate and if an address is incorrect it may not show on the map.</i>
+         They may not always be completely accurate if an address is entered incorrectly.</i>
     </p>
     <h2>Reviews</h2>
     <p>
@@ -212,11 +212,10 @@
     {
         <b>@review.UserProfile.UserName.ToString().ToUpper()</b>
         <p>
-            Rating:
-                <img src="/Images/@review.Rating.ToString()StarRating.png" height="30" width="120"><br>
+            Rating:<img src="/Images/@review.Rating.ToString()StarRating.png" height="30" width="120"><br>
         </p>
         @review.Description.ToString()<br>
-        @Html.ActionLink(" Edit ", "Edit", "Review", new { id = review.ReviewID }, null)  @Html.ActionLink("Delete", "Delete", "Review", new { id = review.ReviewID }, null)
+        @Html.ActionLink(" Edit ", "Edit", "Review", new { id = review.ReviewID }, null) <i>|</i> @Html.ActionLink("Delete", "Delete", "Review", new { id = review.ReviewID }, null)
         <hr>
     }
 

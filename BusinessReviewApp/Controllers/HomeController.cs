@@ -19,6 +19,11 @@ namespace BusinessReviewApp.Controllers
             return View(db.Businesses.ToList());
         }
 
+        public ActionResult UserManual()
+        {
+            return View();
+        }
+
         public ActionResult About()
         {
             ViewBag.Message = "LookItUp allows you to view Irish business details, amend their details and write reviews.";

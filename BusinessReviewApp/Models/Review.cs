@@ -16,12 +16,17 @@ namespace BusinessReviewApp.Models
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         [Required]
         public int ReviewID { get; set; }
+        
         [Required]
+        [StringLength(1000)]
         public string Description { get; set; }
+        
         [Required]
         [Range(0,10)]
         public int Rating { get; set; }
+        
         public int BusinessID { get; set; }
+        
         public int UserId { get; set; }
 
         public virtual Business Business { get; set; }

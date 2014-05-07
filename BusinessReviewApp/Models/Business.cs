@@ -22,38 +22,77 @@ namespace BusinessReviewApp.Models
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         [Required]
         public int BusinessID { get; set; }
+        
         [Required]
+        [StringLength(50)]
         public string Name { get; set; }
+        
         public Nullable<int> Number { get; set; }
+        
         [Required]
+        [StringLength(60)]
         public string Street { get; set; }
+        
         [Required]
+        [StringLength(50)]
         public string Town { get; set; }
+        
+        [StringLength(15)]
         public string Postcode { get; set; }
+
         [Required]
+        [StringLength(30)]
         public string County { get; set; }
+        
         [Required]
+        [StringLength(50)]
         public string Category { get; set; }
+        
         [Required]
+        [StringLength(1000)]
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
+        
         [Required]
         public DateTime DateTime { get; set; }
         //This is used to store all the combinations of all review ratings
+        
         public int CombinedReviewRating { get; set; }
+
+        [StringLength(150)]
         public string URLPhoto1 { get; set; }
+
+        [StringLength(150)]
         public string URLPhoto2 { get; set; }
+
+        [StringLength(150)]
         public string URLPhoto3 { get; set; }
+
+        [StringLength(150)]
         public string URLPhoto4 { get; set; }
+
+        [StringLength(150)]
         public string URLPhoto5 { get; set; }
+        
         public Nullable<float> DecimalLatitude { get; set; }
+        
+        
         public Nullable<float> DecimalLongtitude { get; set; }
+
+        [StringLength(20)]
         public string PhoneNumber { get; set; }
+
+        [StringLength(40)]
         public string Email { get; set; }
+
+        [StringLength(40)]
         public string WebsiteURL { get; set; }
+        
         [Range(0,5)]
         public Nullable<int> PriceRating { get; set; }
+        
         public string SuitableForFamilies { get; set; }
+        
         public string FastFood { get; set; }
 
         public Business()

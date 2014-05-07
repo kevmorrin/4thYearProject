@@ -1,0 +1,165 @@
+﻿@model IEnumerable<BusinessReviewApp.Models.Business>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Number)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Street)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Town)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Postcode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.County)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Category)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CombinedReviewRating)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.URLPhoto1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.URLPhoto2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.URLPhoto3)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.URLPhoto4)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.URLPhoto5)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DecimalLatitude)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DecimalLongtitude)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WebsiteURL)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PriceRating)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SuitableForFamilies)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FastFood)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Number)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Street)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Town)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Postcode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.County)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Category)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CombinedReviewRating)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.URLPhoto1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.URLPhoto2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.URLPhoto3)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.URLPhoto4)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.URLPhoto5)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DecimalLatitude)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DecimalLongtitude)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PhoneNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.WebsiteURL)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PriceRating)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SuitableForFamilies)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FastFood)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.BusinessID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.BusinessID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.BusinessID })
+        </td>
+    </tr>
+}
+
+</table>

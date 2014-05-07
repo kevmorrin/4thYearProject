@@ -24,8 +24,10 @@ namespace BusinessReviewApp
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AuthConfig.RegisterAuth();
-            
+
+            //Initialise DB if none exists
             Database.SetInitializer<Models.UsersContext>(new CreateDatabaseIfNotExists<Models.UsersContext>());
+
             //Locally drop DB if it changes
             //System.Data.Entity.Database.SetInitializer(new System.Data.Entity.DropCreateDatabaseIfModelChanges<Models.UsersContext>());
         }

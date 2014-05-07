@@ -5,7 +5,8 @@
         <title>@ViewBag.Title</title>
         <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
         <meta name="viewport" content="width=device-width" />
-        
+        <script>!function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = "https://platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs); } }(document, "script", "twitter-wjs");</script>
+
         @Styles.Render("~/Content/css/customstyle.css")
     </head>
 
@@ -28,11 +29,11 @@
                             <li>@Html.ActionLink("Home", "Index", "Home")</li>
                             <li>@Html.ActionLink("Search", "Index", "Business")</li>
                             <li>@Html.ActionLink("Create", "Create", "Business")</li>
-                            <li>@Html.ActionLink("About", "About", "Home")</li>
-                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                            <li>@Html.ActionLink("Manage Account", "Manage", "Account")</li>
+                            <li>@Html.ActionLink("About Us", "About", "Home")</li>
+                            <li>@Html.ActionLink("Contact Us", "Contact", "Home")</li>
                         </ul>
                         <div class="float-right">
+                            <a href="https://twitter.com/share" data-text="Looking for business details check out" data-url="http://www.lookitup.cloudapp.net" class="twitter-share-button" data-lang="en">Tweet</a>
                             <section id="login">
                                 @Html.Partial("_LoginPartial")
                             </section>
@@ -52,6 +53,10 @@
             <div class="content-wrapper">
                 <div class="float-left">
                     <p>&copy; @DateTime.Now.Year - LookItUp, IT Tallaght Dublin</p>
+                </div>
+                <div class="float-right">
+                    @Html.ActionLink("User Manual", "UserManual", "Home") | 
+                    @Html.ActionLink("Manage Account", "Manage", "Account")
                 </div>
             </div>
         </footer>
