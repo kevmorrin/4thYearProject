@@ -27,8 +27,8 @@ namespace BusinessReviewApp.Controllers
             return businesses;                                                     // 200 OK, weather serialized in response body
         }
 
-        // GET api/BusinessAPI/category=&county=Dublin&SearchString=Penneys
-        public IEnumerable<Business> GetQueriedBusinesses(string category, string county, string searchString)
+        // GET api/BusinessAPI/value?county=Dublin&SearchString=Penneys
+        public IEnumerable<Business> GetQueriedBusinesses(string value, string county, string searchString)
         {
             
             //Get the businesses from the DB
@@ -44,9 +44,9 @@ namespace BusinessReviewApp.Controllers
                 businesses = businesses.Where(s => s.County.Contains(county)).ToList();
             }
 
-            if (!string.IsNullOrEmpty(category))
+            if (!string.IsNullOrEmpty(value))
             {
-                businesses = businesses.Where(x => x.Category == category).ToList();
+                businesses = businesses.Where(x => x.Category == value).ToList();
             }
 
             return businesses;

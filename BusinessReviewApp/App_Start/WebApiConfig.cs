@@ -11,8 +11,8 @@ namespace BusinessReviewApp
         {
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional }
+                routeTemplate: "api/{controller}/{value}",
+                defaults: new { value = RouteParameter.Optional }
             );
             
             //Serialize data in json
